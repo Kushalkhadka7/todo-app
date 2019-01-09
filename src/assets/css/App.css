@@ -1,0 +1,86 @@
+.clearfix::before,
+.clearfix::after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.todo-header {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  background: cyan;
+  padding: 10px;
+  border-bottom: 1px solid #cefeff;
+}
+
+.todo-container {
+  width: 50%;
+  margin: 0 auto;
+  padding: 0;
+  box-shadow: 7px 3px 79px -1px rgba(0, 0, 0, 0.83);
+  margin-top: 10px;
+}
+
+.navcontainer {
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+.navbar {
+  background-color: cyan;
+  margin-bottom: 10px;
+}
+
+.input-todo {
+  width: 90%;
+}
+
+.todo-list .each-list {
+  background: #e8e8e8;
+  padding: 10px;
+  font-size: 18px;
+  margin: 0 0 5px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.todo-list {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.todo-list ul {
+  padding: 0;
+}
+.todo-list ul li {
+  display: inline;
+  list-style-type: none;
+}
+
+.todo-text {
+  max-width: 83%;
+  word-wrap: break-word;
+}
+
+@media screen and (max-width: 762px) {
+  .todo-header {
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+  }
+  .todo-container {
+    margin-top: 0;
+    min-height: 1000px;
+  }
+  .continer {
+    margin: 0;
+    padding: 0;
+  }
+  .todo-container {
+    width: 100%;
+  }
+}
