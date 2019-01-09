@@ -7,7 +7,7 @@ class DisplayList extends React.Component {
       handleDelete,
       checkboxRef,
       handleSelected,
-      openModel
+      openModal
     } = this.props;
 
     return (
@@ -27,7 +27,7 @@ class DisplayList extends React.Component {
                     <div className="todo-text">{value.todo}</div>
                     <button
                       className="btn btn-success delete-btn"
-                      onClick={() => openModel(index)}
+                      onClick={() => openModal(index)}
                     >
                       Edit
                     </button>

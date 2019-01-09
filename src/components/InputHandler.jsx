@@ -16,7 +16,10 @@ class InputHandler extends React.PureComponent {
               className="form-control input-todo"
             />
             <div className="input-group-append">
-              <button className="btn btn-primary" onClick={e => submitInput(e)}>
+              <button
+                className="btn btn-primary add-todo-btn"
+                onClick={e => submitInput(e)}
+              >
                 Add
               </button>
             </div>

@@ -12,7 +12,7 @@ class HomeComponent extends React.Component {
       handleDelete,
       handleSelected,
       checkboxRef,
-      openModel
+      openModal
     } = this.props;
     return (
       <div>
@@ -22,7 +22,7 @@ class HomeComponent extends React.Component {
           handleDelete={handleDelete}
           handleSelected={handleSelected}
           checkboxRef={checkboxRef}
-          openModel={openModel}
+          openModal={openModal}
         />
       </div>
     );

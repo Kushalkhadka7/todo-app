@@ -16,6 +16,7 @@ class App extends Component {
       inputValue: '',
       renderHome: true,
       completedTodo: [],
+      modalIsOpen: false,
       isCompleted: false,
       renderCompleted: false,
       renderIncomplete: false
@@ -91,14 +92,29 @@ class App extends Component {
     });
   };
 
-  openModel = index => {
+  openModal = index => {
     console.log(index);
+    this.setState({
+      modalIsOpen: true
+    });
   };
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  };
+
   render() {
     return (
       <div className="container todo-container">
         <HeaderComponent />
         <NavComponent handleComponent={this.handleComponentRender} />
+        <Model
+          openModal={this.openModal}
+          afterOpenModal={this.afterOpenModal}
+          closeModal={this.closeModal}
+          modelToggle={this.state.modalIsOpen}
+          data={this.state}
+        />
         {this.state.renderHome && (
           <HomeComponent
             inputRef={this.inputRef}
@@ -107,7 +123,7 @@ class App extends Component {
             handleDelete={this.handleDelete}
             handleSelected={this.handleSelected}
             checkboxRef={this.checkboxRef}
-            openModel={this.openModel}
+            openModal={this.openModal}
           />
         )}
         {this.state.renderCompleted && <Completed todo={this.state.todoList} />}
