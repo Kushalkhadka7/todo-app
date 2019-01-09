@@ -3,10 +3,9 @@ import DisplayList from './DisplayList';
 
 class Completed extends React.Component {
   render() {
-    const { completed, handleDelete } = this.props;
     return (
       <div>
-        <DisplayList todo={completed} handleDelete={handleDelete} />
+        <DisplayList todo={this.props.todo} />
       </div>
     );
   }

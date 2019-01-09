@@ -47,6 +47,11 @@
   align-items: center;
   border-radius: 10px;
 }
+.default-text {
+  font-size: 20px;
+  text-align: center;
+  padding: 100px;
+}
 
 .todo-list {
   height: 400px;

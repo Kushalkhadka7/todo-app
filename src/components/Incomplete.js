@@ -3,11 +3,7 @@ import DisplayList from './DisplayList';
 
 class Incomplete extends React.Component {
   render() {
-    return (
-      <div>
-        <DisplayList todo={this.props.incomplete} />
-      </div>
-    );
+    return <div>i am Incomplete</div>;
   }
 }
 

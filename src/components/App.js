@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 import '../assets/css/App.css';
-// import Completed from './Completed';
-// import Incomplete from './Incomplete';
-import DisplayList from './DisplayList';
+import Completed from './Completed';
+import Incomplete from './Incomplete';
 import NavComponent from './NavComponent';
-import InputHandler from './InputHandler';
+import HomeComponent from './HomeComponent';
 import HeaderComponent from './HeaderComponent';
+import Model from './Model';
 
 class App extends Component {
   constructor() {
@@ -87,31 +87,31 @@ class App extends Component {
     let updatedTodo = [...this.state.todoList];
     updatedTodo[index].isCompleted = bool;
     this.setState({
-      todoList: updatedTodo,
-      isCompleted: bool
+      todoList: updatedTodo
     });
-    console.log(this.state.todoList);
   };
 
+  openModel = index => {
+    console.log(index);
+  };
   render() {
     return (
       <div className="container todo-container">
         <HeaderComponent />
         <NavComponent handleComponent={this.handleComponentRender} />
         {this.state.renderHome && (
-          <React.Fragment>
-            <InputHandler
-              inputRef={this.inputRef}
-              submitInput={this.submitInput}
-            />
-            <DisplayList
-              todo={this.state.todoList}
-              handleDelete={this.handleDelete}
-              handleSelected={this.handleSelected}
-              checkboxRef={this.checkboxRef}
-            />
-          </React.Fragment>
+          <HomeComponent
+            inputRef={this.inputRef}
+            submitInput={this.submitInput}
+            todo={this.state.todoList}
+            handleDelete={this.handleDelete}
+            handleSelected={this.handleSelected}
+            checkboxRef={this.checkboxRef}
+            openModel={this.openModel}
+          />
         )}
+        {this.state.renderCompleted && <Completed todo={this.state.todoList} />}
+        {this.state.renderIncomplete && <Incomplete />}
       </div>
     );
   }
