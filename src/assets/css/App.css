@@ -18,7 +18,7 @@
   width: 50%;
   margin: 0 auto;
   padding: 0;
-  box-shadow: 7px 3px 79px -1px rgba(0, 0, 0, 0.83);
+  box-shadow: 7px 3px 79px -1px rgba(142, 142, 142, 0.83);
   margin-top: 10px;
 }
 
@@ -46,7 +46,9 @@
   justify-content: flex-start;
   align-items: center;
   border-radius: 10px;
+  box-shadow: 7px 3px 79px -1px rgba(142, 142, 142, 0.83);
 }
+
 .default-text {
   font-size: 20px;
   text-align: center;
@@ -61,6 +63,7 @@
 .todo-list ul {
   padding: 0;
 }
+
 .todo-list ul li {
   display: inline;
   list-style-type: none;
@@ -81,11 +84,6 @@
   z-index: 0;
 }
 
-.model-content {
-  position: absolute;
-  bottom: 50%;
-  transform: translateY(-50%);
-}
 @media screen and (max-width: 762px) {
   .todo-container {
     margin-top: 0;

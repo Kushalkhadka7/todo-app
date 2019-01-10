@@ -1,29 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import InputHandler from './InputHandler';
 import DisplayList from './DisplayList';
+import InputHandler from './InputHandler';
 
 class HomeComponent extends React.Component {
   render() {
     const {
-      inputRef,
-      submitInput,
       todo,
+      isEdited,
+      inputValue,
+      submitInput,
       handleDelete,
       handleSelected,
-      checkboxRef,
-      openModal
+      handleTextChange,
+      handleEdition
     } = this.props;
+
     return (
       <div>
-        <InputHandler inputRef={inputRef} submitInput={submitInput} />
+        <InputHandler
+          inputValue={inputValue}
+          handleTextChange={handleTextChange}
+          submitInput={submitInput}
+          isEdited={isEdited}
+        />
         <DisplayList
           todo={todo}
           handleDelete={handleDelete}
           handleSelected={handleSelected}
-          checkboxRef={checkboxRef}
-          openModal={openModal}
+          isEdited={isEdited}
+          handleEdition={handleEdition}
         />
       </div>
     );
@@ -31,13 +38,10 @@ class HomeComponent extends React.Component {
 }
 
 HomeComponent.propTypes = {
-  inputRef: PropTypes.any.isRequired,
   submitInput: PropTypes.func,
-  todo: PropTypes.array.isRequired,
   handleDelete: PropTypes.func,
   handleSelected: PropTypes.func,
-  checkboxRef: PropTypes.any.isRequired,
-  openModal: PropTypes.func
+  todo: PropTypes.array.isRequired
 };
 
 export default HomeComponent;

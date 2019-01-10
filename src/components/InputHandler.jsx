@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AddTodo = ({ inputRef = null, submitInput = f => f }) => (
+const AddTodo = ({
+  inputValue = 'enter your text here',
+  handleTextChange = f => f,
+  submitInput = f => f
+}) => (
   <div className="row navcontainer">
     <div className="col-md-12 input-container">
       <div className="input-group mb-3">
         <input
           type="text"
+          value={inputValue}
           onKeyUp={e => submitInput(e)}
-          ref={inputRef}
+          onChange={text => handleTextChange(text)}
           className="form-control input-todo"
         />
         <div className="input-group-append">
@@ -25,8 +30,8 @@ const AddTodo = ({ inputRef = null, submitInput = f => f }) => (
 );
 
 AddTodo.proTypes = {
-  submitInput: PropTypes.func.isRequired,
-  inputRef: PropTypes.any.isRequired
+  inputRef: PropTypes.any.isRequired,
+  submitInput: PropTypes.func.isRequired
 };
 
 export default AddTodo;

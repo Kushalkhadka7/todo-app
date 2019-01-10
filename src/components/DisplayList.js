@@ -5,10 +5,10 @@ class DisplayList extends React.Component {
   render() {
     const {
       todo,
+      isEdited,
       handleDelete,
-      checkboxRef,
-      handleSelected,
-      openModal
+      handleEdition,
+      handleSelected
     } = this.props;
 
     return (
@@ -22,13 +22,12 @@ class DisplayList extends React.Component {
                     <input
                       className="completed-check"
                       type="checkbox"
-                      ref={checkboxRef}
                       onClick={() => handleSelected(value.isCompleted, index)}
                     />
                     <div className="todo-text">{value.todo}</div>
                     <button
                       className="btn btn-success delete-btn"
-                      onClick={() => openModal(index)}
+                      onClick={() => handleEdition(index)}
                     >
                       Edit
                     </button>
@@ -52,11 +51,9 @@ class DisplayList extends React.Component {
 }
 
 DisplayList.propTypes = {
-  todo: PropTypes.array.isRequired,
   handleDelete: PropTypes.func,
   handleSelected: PropTypes.func,
-  checkboxRef: PropTypes.any.isRequired,
-  openModal: PropTypes.func
+  todo: PropTypes.array.isRequired
 };
 
 export default DisplayList;

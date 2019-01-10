@@ -1,14 +1,10 @@
 import React from 'react';
 import DisplayList from './DisplayList';
 
-class Completed extends React.Component {
-  render() {
-    return (
-      <div>
-        <DisplayList todo={this.props.todo} />
-      </div>
-    );
-  }
-}
+const Completed = ({ props }) => (
+  <div>
+    <DisplayList todo={props.todo} />
+  </div>
+);
 
 export default Completed;
