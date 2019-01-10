@@ -6,7 +6,6 @@ import Incomplete from './Incomplete';
 import NavComponent from './NavComponent';
 import HomeComponent from './HomeComponent';
 import HeaderComponent from './HeaderComponent';
-import Model from './Model';
 
 class App extends Component {
   constructor() {
@@ -14,38 +13,37 @@ class App extends Component {
     this.state = {
       todoList: [],
       inputValue: '',
-      renderHome: true,
+      isEdited: false,
+      editIndex: null,
       completedTodo: [],
-      modalIsOpen: false,
       isCompleted: false,
-      renderCompleted: false,
-      renderIncomplete: false
+      isHomeTodoVisible: true,
+      isCompleteTodoVisible: false,
+      isIncompleteTodoVisible: false
     };
-    this.inputRef = React.createRef();
-    this.checkboxRef = React.createRef();
   }
 
   handleComponentRender = text => {
     switch (text) {
       case 'home':
         this.setState({
-          renderHome: true,
-          renderCompleted: false,
-          renderIncomplete: false
+          isHomeTodoVisible: true,
+          isCompleteTodoVisible: false,
+          isIncompleteTodoVisible: false
         });
         break;
       case 'completed':
         this.setState({
-          renderHome: false,
-          renderCompleted: true,
-          renderIncomplete: false
+          isHomeTodoVisible: false,
+          isCompleteTodoVisible: true,
+          isIncompleteTodoVisible: false
         });
         break;
       case 'incomplete':
         this.setState({
-          renderHome: false,
-          renderCompleted: false,
-          renderIncomplete: true
+          isHomeTodoVisible: false,
+          isCompleteTodoVisible: false,
+          isIncompleteTodoVisible: true
         });
         break;
       default:
@@ -57,9 +55,9 @@ class App extends Component {
 
   submitInput = e => {
     e.preventDefault();
-    let updatedTodo = [...this.state.todoList];
-    let value = this.inputRef.current.value;
+    let value = this.state.inputValue;
     let date = Date.now().toLocaleString();
+    let updatedTodo = [...this.state.todoList];
     if (value !== '') {
       if (e.keyCode === 13 || e.type === 'click') {
         updatedTodo.unshift({
@@ -67,8 +65,10 @@ class App extends Component {
           date: date,
           isCompleted: false
         });
-        this.setState({ todoList: updatedTodo });
-        this.inputRef.current.value = '';
+        this.setState({
+          todoList: updatedTodo,
+          inputValue: ''
+        });
       }
     } else {
       alert('nothing');
@@ -92,15 +92,20 @@ class App extends Component {
     });
   };
 
-  openModal = index => {
-    console.log(index);
+  handleTextChange = event => {
     this.setState({
-      modalIsOpen: true
+      inputValue: event.target.value
     });
   };
 
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
+  handleEdition = index => {
+    if (this.state.isEdited) {
+      index = null;
+    }
+    this.setState(prevState => ({
+      isEdited: !prevState.isEdited,
+      editIndex: index
+    }));
   };
 
   render() {
@@ -108,28 +113,48 @@ class App extends Component {
       <div className="container todo-container">
         <HeaderComponent />
         <NavComponent handleComponent={this.handleComponentRender} />
-        <Model
-          openModal={this.openModal}
-          afterOpenModal={this.afterOpenModal}
-          closeModal={this.closeModal}
-          modelToggle={this.state.modalIsOpen}
-          data={this.state}
-        />
-        {this.state.renderHome && (
+        {this.state.isHomeTodoVisible && (
           <HomeComponent
-            inputRef={this.inputRef}
+            inputValue={this.state.inputValue}
             submitInput={this.submitInput}
+            handleTextChange={this.handleTextChange}
             todo={this.state.todoList}
             handleDelete={this.handleDelete}
             handleSelected={this.handleSelected}
-            checkboxRef={this.checkboxRef}
-            openModal={this.openModal}
+            isEdited={this.state.isEdited}
+            editIndex={this.state.editIndex}
+            handleEdition={this.handleEdition}
           />
         )}
-        {this.state.renderCompleted && <Completed todo={this.state.todoList} />}
-        {this.state.renderIncomplete && <Incomplete />}
+        {this.state.isCompleteTodoVisible && (
+          <Completed
+            inputValue={this.state.inputValue}
+            submitInput={this.submitInput}
+            handleTextChange={this.handleTextChange}
+            todo={this.state.todoList}
+            handleDelete={this.handleDelete}
+            handleSelected={this.handleSelected}
+            isEdited={this.state.isEdited}
+            editIndex={this.state.editIndex}
+            handleEdition={this.handleEdition}
+          />
+        )}
+        {this.state.isIncompleteTodoVisible && (
+          <Incomplete
+            inputValue={this.state.inputValue}
+            submitInput={this.submitInput}
+            handleTextChange={this.handleTextChange}
+            todo={this.state.todoList}
+            handleDelete={this.handleDelete}
+            handleSelected={this.handleSelected}
+            isEdited={this.state.isEdited}
+            editIndex={this.state.editIndex}
+            handleEdition={this.handleEdition}
+          />
+        )}
       </div>
     );
   }
 }
+
 export default App;

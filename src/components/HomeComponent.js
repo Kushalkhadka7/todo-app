@@ -1,32 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import InputHandler from './InputHandler';
 import DisplayList from './DisplayList';
+import InputHandler from './InputHandler';
 
 class HomeComponent extends React.Component {
   render() {
     const {
-      inputRef,
-      submitInput,
       todo,
+      isEdited,
+      editIndex,
+      inputValue,
+      submitInput,
       handleDelete,
+      handleEdition,
       handleSelected,
-      checkboxRef,
-      openModal
+      handleTextChange
     } = this.props;
+
     return (
       <div>
-        <InputHandler inputRef={inputRef} submitInput={submitInput} />
+        <InputHandler
+          isEdited={isEdited}
+          inputValue={inputValue}
+          submitInput={submitInput}
+          handleTextChange={handleTextChange}
+        />
         <DisplayList
           todo={todo}
+          isEdited={isEdited}
+          editIndex={editIndex}
           handleDelete={handleDelete}
+          handleEdition={handleEdition}
           handleSelected={handleSelected}
-          checkboxRef={checkboxRef}
-          openModal={openModal}
         />
       </div>
     );
   }
 }
+
+HomeComponent.propTypes = {
+  submitInput: PropTypes.func,
+  handleDelete: PropTypes.func,
+  handleSelected: PropTypes.func,
+  todo: PropTypes.array.isRequired
+};
 
 export default HomeComponent;
