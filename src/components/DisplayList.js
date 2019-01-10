@@ -2,21 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class DisplayList extends React.Component {
-  state = {
-    editTodoValue: ''
-  };
-
-  static getDerivedStateFromProps(props, state) {
-    console.log(props, state);
-  }
   render() {
     let {
       todo,
       isEdited,
+      handleChange,
       handleDelete,
       handleEdition,
       handleSelected,
-      editIndex
+      editIndex,
+      submitInput
     } = this.props;
 
     return (
@@ -40,27 +35,32 @@ class DisplayList extends React.Component {
                       />
                       {isEdited ? (
                         <input
+                          className="form-control edit-todo"
                           type="text"
                           value={value.todo}
-                          onChange={this.handleChange}
+                          onChange={e => handleChange(value.todo, index, e)}
+                          onKeyUp={e =>
+                            e.key === 'Enter' && handleEdition(null)
+                          }
                         />
                       ) : (
                         <p className="todo-text">{value.todo}</p>
                       )}
-
-                      <button
-                        disabled={value.isCompleted}
-                        className="btn btn-success delete-btn"
-                        onClick={() => handleEdition(index)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="btn btn-danger delete-btn"
-                        onClick={() => handleDelete(index)}
-                      >
-                        Delete
-                      </button>
+                      <div className="actions-btn-container">
+                        <button
+                          disabled={value.isCompleted}
+                          className="btn btn-success action-btn"
+                          onClick={() => handleEdition(index)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-danger action-btn"
+                          onClick={() => handleDelete(index)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </li>
                 );

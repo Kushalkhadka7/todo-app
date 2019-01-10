@@ -4,6 +4,17 @@
   content: '';
   display: table;
 }
+.search-text-box {
+  margin: 0 auto;
+  width: 94%;
+  margin-bottom: 10px;
+}
+
+.edit-todo {
+  max-width: 60%;
+  margin: 0 10px;
+  display: inline-block;
+}
 
 .todo-header {
   font-size: 25px;
@@ -42,11 +53,15 @@
   padding: 10px;
   font-size: 18px;
   margin: 0 0 5px 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  display: block;
   border-radius: 10px;
+  text-align: left;
   box-shadow: 7px 3px 79px -1px rgba(142, 142, 142, 0.83);
+}
+
+.completed-check {
+  margin: 12px 0;
+  float: left;
 }
 
 .default-text {
@@ -70,8 +85,19 @@
 }
 
 .todo-text {
-  max-width: 83%;
+  display: inline-block;
+  margin: 5px 15px 0 15px;
+  max-width: 50%;
   word-wrap: break-word;
+  text-align: left;
+}
+
+.action-btn {
+  margin: 0 5px;
+}
+
+.actions-btn-container {
+  float: right;
 }
 
 .model-button {

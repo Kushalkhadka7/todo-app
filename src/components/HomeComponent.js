@@ -15,6 +15,7 @@ class HomeComponent extends React.Component {
       handleDelete,
       handleEdition,
       handleSelected,
+      handleChange,
       handleTextChange
     } = this.props;
 
@@ -33,6 +34,8 @@ class HomeComponent extends React.Component {
           handleDelete={handleDelete}
           handleEdition={handleEdition}
           handleSelected={handleSelected}
+          handleChange={handleChange}
+          submitInput={submitInput}
         />
       </div>
     );

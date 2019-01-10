@@ -6,6 +6,7 @@ import Incomplete from './Incomplete';
 import NavComponent from './NavComponent';
 import HomeComponent from './HomeComponent';
 import HeaderComponent from './HeaderComponent';
+import InputComponent from './InputHandler';
 
 class App extends Component {
   constructor() {
@@ -21,6 +22,10 @@ class App extends Component {
       isCompleteTodoVisible: false,
       isIncompleteTodoVisible: false
     };
+
+    this.tempStorageForEdit = null;
+
+    this.originalTodoList = null;
   }
 
   handleComponentRender = text => {
@@ -99,13 +104,44 @@ class App extends Component {
   };
 
   handleEdition = index => {
-    if (this.state.isEdited) {
+    // if (index !== this.state.editIndex && this.state.editIndex !== null) {
+    //   this.handleChange(this.tempStorageForEdit, this.state.editIndex, null);
+    // }
+    if (index === this.state.editIndex) {
       index = null;
     }
     this.setState(prevState => ({
       isEdited: !prevState.isEdited,
       editIndex: index
     }));
+    // this.tempStorageForEdit = index != null && this.state.todoList[index].todo;
+  };
+
+  handleChange = (value, index, e) => {
+    let updatedTodo = [...this.state.todoList];
+    updatedTodo[index].todo = e ? e.target.value : value;
+    this.setState({
+      todoList: updatedTodo
+    });
+  };
+
+  searchTodo = e => {
+    console.log(e.target.value);
+    if (this.originalTodoList.length !== 0) {
+      let value = e.target.value;
+      let updatedTodo = this.originalTodoList.map(data => data);
+
+      console.log(this.originalTodoList);
+
+      let filteredTodo = updatedTodo.filter(
+        v => v.todo.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      );
+      this.setState({
+        todoList: filteredTodo
+      });
+    } else {
+      console.log('list is empty');
+    }
   };
 
   render() {
@@ -113,6 +149,17 @@ class App extends Component {
       <div className="container todo-container">
         <HeaderComponent />
         <NavComponent handleComponent={this.handleComponentRender} />
+        <input
+          className="form-control search-text-box"
+          placeholder="search"
+          type="text"
+          value={this.state.searchText}
+          onChange={e => this.searchTodo(e)}
+          onFocus={e => (this.originalTodoList = this.state.todoList)}
+          onBlur={e => {
+            this.setState({ todoList: this.originalTodoList });
+          }}
+        />
         {this.state.isHomeTodoVisible && (
           <HomeComponent
             inputValue={this.state.inputValue}
@@ -124,6 +171,7 @@ class App extends Component {
             isEdited={this.state.isEdited}
             editIndex={this.state.editIndex}
             handleEdition={this.handleEdition}
+            handleChange={this.handleChange}
           />
         )}
         {this.state.isCompleteTodoVisible && (
