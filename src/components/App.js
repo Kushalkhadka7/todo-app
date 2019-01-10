@@ -6,7 +6,6 @@ import Incomplete from './Incomplete';
 import NavComponent from './NavComponent';
 import HomeComponent from './HomeComponent';
 import HeaderComponent from './HeaderComponent';
-import InputComponent from './InputHandler';
 
 class App extends Component {
   constructor() {
@@ -22,9 +21,7 @@ class App extends Component {
       isCompleteTodoVisible: false,
       isIncompleteTodoVisible: false
     };
-
     this.tempStorageForEdit = null;
-
     this.originalTodoList = null;
   }
 
