@@ -81,6 +81,11 @@
   z-index: 0;
 }
 
+.model-content {
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(-50%);
+}
 @media screen and (max-width: 762px) {
   .todo-container {
     margin-top: 0;

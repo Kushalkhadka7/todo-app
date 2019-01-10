@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class DisplayList extends React.Component {
   render() {
@@ -49,5 +50,13 @@ class DisplayList extends React.Component {
     );
   }
 }
+
+DisplayList.propTypes = {
+  todo: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func,
+  handleSelected: PropTypes.func,
+  checkboxRef: PropTypes.any.isRequired,
+  openModal: PropTypes.func
+};
 
 export default DisplayList;

@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import InputHandler from './InputHandler';
 
 const customStyles = {
   content: {
@@ -13,7 +15,9 @@ const customStyles = {
     transform: 'translate(-50%, -50%)'
   }
 };
+
 Modal.setAppElement('#root');
+
 class Model extends React.Component {
   showModel = () => {
     console.log(this.props.data);
@@ -29,16 +33,18 @@ class Model extends React.Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <div>
-            <h2 ref={subtitle => (this.subtitle = subtitle)}>Hello</h2>
-            <button className="model-button" onClick={closeModal}>
-              {this.showModel()}
-              close
+          <button className="model-button" onClick={closeModal}>
+            {this.showModel()}
+            close
             </button>
+          <div className="model-content">
+            <InputHandler />
+            
           </div>
         </Modal>
       </div>
     );
   }
 }
+
 export default Model;

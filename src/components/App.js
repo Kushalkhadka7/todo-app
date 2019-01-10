@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
+import Model from './Model';
 import '../assets/css/App.css';
 import Completed from './Completed';
 import Incomplete from './Incomplete';
 import NavComponent from './NavComponent';
 import HomeComponent from './HomeComponent';
 import HeaderComponent from './HeaderComponent';
-import Model from './Model';
 
 class App extends Component {
   constructor() {
@@ -93,7 +93,9 @@ class App extends Component {
   };
 
   openModal = index => {
-    console.log(index);
+    let updatedTodo = [...this.state.todoList];
+    let requiredData = updatedTodo.splice(index, 1);
+    console.log(requiredData);
     this.setState({
       modalIsOpen: true
     });
@@ -114,6 +116,9 @@ class App extends Component {
           closeModal={this.closeModal}
           modelToggle={this.state.modalIsOpen}
           data={this.state}
+          handleDelete={this.handleDelete}
+          handleSelected={this.handleSelected}
+          checkboxRef={this.checkboxRef}
         />
         {this.state.renderHome && (
           <HomeComponent
@@ -127,7 +132,9 @@ class App extends Component {
           />
         )}
         {this.state.renderCompleted && <Completed todo={this.state.todoList} />}
-        {this.state.renderIncomplete && <Incomplete />}
+        {this.state.renderIncomplete && (
+          <Incomplete todo={this.state.todoList} />
+        )}
       </div>
     );
   }

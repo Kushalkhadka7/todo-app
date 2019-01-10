@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class NavComponent extends React.PureComponent {
   render() {
@@ -24,5 +25,8 @@ class NavComponent extends React.PureComponent {
     );
   }
 }
+NavComponent.propTypes = {
+  handleComponent: PropTypes.func.isRequired
+};
 
 export default NavComponent;
