@@ -14,6 +14,7 @@ class App extends Component {
       todoList: [],
       inputValue: '',
       isEdited: false,
+      editIndex: null,
       completedTodo: [],
       isCompleted: false,
       isHomeTodoVisible: true,
@@ -98,9 +99,13 @@ class App extends Component {
   };
 
   handleEdition = index => {
-    let updatedTodo = [...this.state.todoList];
-
-    //code to edit todo
+    if (this.state.isEdited) {
+      index = null;
+    }
+    this.setState(prevState => ({
+      isEdited: !prevState.isEdited,
+      editIndex: index
+    }));
   };
 
   render() {
@@ -117,14 +122,35 @@ class App extends Component {
             handleDelete={this.handleDelete}
             handleSelected={this.handleSelected}
             isEdited={this.state.isEdited}
+            editIndex={this.state.editIndex}
             handleEdition={this.handleEdition}
           />
         )}
         {this.state.isCompleteTodoVisible && (
-          <Completed todo={this.state.todoList} />
+          <Completed
+            inputValue={this.state.inputValue}
+            submitInput={this.submitInput}
+            handleTextChange={this.handleTextChange}
+            todo={this.state.todoList}
+            handleDelete={this.handleDelete}
+            handleSelected={this.handleSelected}
+            isEdited={this.state.isEdited}
+            editIndex={this.state.editIndex}
+            handleEdition={this.handleEdition}
+          />
         )}
         {this.state.isIncompleteTodoVisible && (
-          <Incomplete todo={this.state.todoList} />
+          <Incomplete
+            inputValue={this.state.inputValue}
+            submitInput={this.submitInput}
+            handleTextChange={this.handleTextChange}
+            todo={this.state.todoList}
+            handleDelete={this.handleDelete}
+            handleSelected={this.handleSelected}
+            isEdited={this.state.isEdited}
+            editIndex={this.state.editIndex}
+            handleEdition={this.handleEdition}
+          />
         )}
       </div>
     );

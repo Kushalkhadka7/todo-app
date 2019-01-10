@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const AddTodo = ({
-  inputValue = 'enter your text here',
+  inputValue,
   handleTextChange = f => f,
   submitInput = f => f
 }) => (

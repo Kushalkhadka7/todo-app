@@ -9,28 +9,30 @@ class HomeComponent extends React.Component {
     const {
       todo,
       isEdited,
+      editIndex,
       inputValue,
       submitInput,
       handleDelete,
+      handleEdition,
       handleSelected,
-      handleTextChange,
-      handleEdition
+      handleTextChange
     } = this.props;
 
     return (
       <div>
         <InputHandler
-          inputValue={inputValue}
-          handleTextChange={handleTextChange}
-          submitInput={submitInput}
           isEdited={isEdited}
+          inputValue={inputValue}
+          submitInput={submitInput}
+          handleTextChange={handleTextChange}
         />
         <DisplayList
           todo={todo}
-          handleDelete={handleDelete}
-          handleSelected={handleSelected}
           isEdited={isEdited}
+          editIndex={editIndex}
+          handleDelete={handleDelete}
           handleEdition={handleEdition}
+          handleSelected={handleSelected}
         />
       </div>
     );
