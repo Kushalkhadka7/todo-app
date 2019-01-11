@@ -1,36 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class DisplayList extends React.Component {
+class DisplayTodoList extends React.Component {
   render() {
     let {
-      todo,
       isEdited,
-      handleChange,
-      handleDelete,
-      handleEdition,
-      handleSelected,
+      editTodo,
       editIndex,
-      submitInput
-    } = this.props;
+      deleteTodo,
+      handleChange,
+      markTodoCompleted
+    } = this.props.props;
+    const { todos } = this.props;
 
     return (
       <div className="row navcontainer">
         <div className="col-md-12 todo-list">
-          {todo.length ? (
+          {todos.length ? (
             <ul>
-              {todo.map((value, index) => {
+              {todos.map((value, index) => {
                 index === editIndex ? (isEdited = true) : (isEdited = false);
                 return (
-                  <li key={index}>
+                  <li key={value.id}>
                     <div className="each-list clearfix">
                       <input
                         className="completed-check"
-                        checked={value.isCompleted}
+                        checked={value.isTodoCompleted}
                         value={isEdited}
                         type="checkbox"
                         onChange={() =>
-                          handleSelected(value.isCompleted, index)
+                          markTodoCompleted(value.isTodoCompleted, index)
                         }
                       />
                       {isEdited ? (
@@ -39,24 +38,25 @@ class DisplayList extends React.Component {
                           type="text"
                           value={value.todo}
                           onChange={e => handleChange(value.todo, index, e)}
-                          onKeyUp={e =>
-                            e.key === 'Enter' && handleEdition(null)
-                          }
+                          onKeyUp={e => e.key === 'Enter' && editTodo(null)}
                         />
                       ) : (
-                        <p className="todo-text">{value.todo}</p>
+                        <div className="todo-content-container">
+                          <p className="todo-text">{value.todo}</p>
+                          <p className="todo-date">Created At:{value.date}</p>
+                        </div>
                       )}
                       <div className="actions-btn-container">
                         <button
-                          disabled={value.isCompleted}
+                          disabled={value.isTodoCompleted}
                           className="btn btn-success action-btn"
-                          onClick={() => handleEdition(index)}
+                          onClick={() => editTodo(index)}
                         >
-                          Edit
+                          {isEdited ? <i className="fas fa-check" /> : 'Edit'}
                         </button>
                         <button
                           className="btn btn-danger action-btn"
-                          onClick={() => handleDelete(index)}
+                          onClick={() => deleteTodo(index)}
                         >
                           Delete
                         </button>
@@ -67,7 +67,7 @@ class DisplayList extends React.Component {
               })}
             </ul>
           ) : (
-            <div className="default-text">nothing to display</div>
+            <div className="default-text">no todo to display</div>
           )}
         </div>
       </div>
@@ -75,10 +75,9 @@ class DisplayList extends React.Component {
   }
 }
 
-DisplayList.propTypes = {
-  handleDelete: PropTypes.func,
-  handleSelected: PropTypes.func,
+DisplayTodoList.propTypes = {
+  props: PropTypes.any.isRequired,
   todo: PropTypes.array.isRequired
 };
 
-export default DisplayList;
+export default DisplayTodoList;

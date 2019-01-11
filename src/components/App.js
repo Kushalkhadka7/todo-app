@@ -1,49 +1,49 @@
 import React, { Component } from 'react';
 
+import Nav from './Nav';
+import Header from './Header';
 import '../assets/css/App.css';
-import Completed from './Completed';
-import Incomplete from './Incomplete';
-import NavComponent from './NavComponent';
-import HomeComponent from './HomeComponent';
-import HeaderComponent from './HeaderComponent';
+import TodoHome from './TodoHome';
+import CompletedTodoLists from './CompletedTodoLists';
+import InCompleteTodoList from './InCompleteTodoList';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       todoList: [],
-      inputValue: '',
       isEdited: false,
       editIndex: null,
-      completedTodo: [],
-      isCompleted: false,
-      isHomeTodoVisible: true,
+      inputTodoValue: '',
+      isTodoCompleted: false,
+      isTodoHomeVisible: true,
       isCompleteTodoVisible: false,
       isIncompleteTodoVisible: false
     };
-    this.tempStorageForEdit = null;
     this.originalTodoList = null;
+    this.tempStorageForEdit = null;
   }
 
+  //determines which component to render in the Dom
   handleComponentRender = text => {
     switch (text) {
-      case 'home':
+      case 'renderTodoHome':
         this.setState({
-          isHomeTodoVisible: true,
+          isTodoHomeVisible: true,
           isCompleteTodoVisible: false,
           isIncompleteTodoVisible: false
         });
         break;
-      case 'completed':
+      case 'renderCompletedTodoLists':
         this.setState({
-          isHomeTodoVisible: false,
+          isTodoHomeVisible: false,
           isCompleteTodoVisible: true,
           isIncompleteTodoVisible: false
         });
         break;
-      case 'incomplete':
+      case 'renderIncompleteTodoLists':
         this.setState({
-          isHomeTodoVisible: false,
+          isTodoHomeVisible: false,
           isCompleteTodoVisible: false,
           isIncompleteTodoVisible: true
         });
@@ -55,21 +55,23 @@ class App extends Component {
     }
   };
 
-  submitInput = e => {
-    e.preventDefault();
-    let value = this.state.inputValue;
-    let date = Date.now().toLocaleString();
-    let updatedTodo = [...this.state.todoList];
+  //add new todo to the todoList array
+  addTodo = event => {
+    event.preventDefault();
+    let value = this.state.inputTodoValue;
+    let date = new Date().toLocaleString();
+    let todoListCopy = [...this.state.todoList];
     if (value !== '') {
-      if (e.keyCode === 13 || e.type === 'click') {
-        updatedTodo.unshift({
+      if (event.keyCode === 13 || event.type === 'click') {
+        todoListCopy.unshift({
+          id: Date.now(),
           todo: value,
           date: date,
-          isCompleted: false
+          isTodoCompleted: false
         });
         this.setState({
-          todoList: updatedTodo,
-          inputValue: ''
+          todoList: todoListCopy,
+          inputTodoValue: ''
         });
       }
     } else {
@@ -77,33 +79,33 @@ class App extends Component {
     }
   };
 
-  handleDelete = index => {
-    let updatedTodo = [...this.state.todoList];
-    updatedTodo.splice(index, 1);
+  //deletes a particular index todo from the todolist array
+  deleteTodo = index => {
+    let todoListCopy = [...this.state.todoList];
+    todoListCopy.splice(index, 1);
     this.setState({
-      todoList: updatedTodo
+      todoList: todoListCopy
     });
   };
 
-  handleSelected = (bool, index) => {
+  //marks the todo is completed using checkbox
+  markTodoCompleted = (bool, index) => {
     bool = !bool;
-    let updatedTodo = [...this.state.todoList];
-    updatedTodo[index].isCompleted = bool;
+    let todoListCopy = [...this.state.todoList];
+    todoListCopy[index].isTodoCompleted = bool;
     this.setState({
-      todoList: updatedTodo
+      todoList: todoListCopy
     });
   };
 
   handleTextChange = event => {
     this.setState({
-      inputValue: event.target.value
+      inputTodoValue: event.target.value
     });
   };
 
-  handleEdition = index => {
-    // if (index !== this.state.editIndex && this.state.editIndex !== null) {
-    //   this.handleChange(this.tempStorageForEdit, this.state.editIndex, null);
-    // }
+  //edit the todo text using the index
+  editTodo = index => {
     if (index === this.state.editIndex) {
       index = null;
     }
@@ -111,30 +113,27 @@ class App extends Component {
       isEdited: !prevState.isEdited,
       editIndex: index
     }));
-    // this.tempStorageForEdit = index != null && this.state.todoList[index].todo;
   };
 
   handleChange = (value, index, e) => {
-    let updatedTodo = [...this.state.todoList];
-    updatedTodo[index].todo = e ? e.target.value : value;
+    let todoListCopy = [...this.state.todoList];
+    todoListCopy[index].todo = e ? e.target.value : value;
     this.setState({
-      todoList: updatedTodo
+      todoList: todoListCopy
     });
   };
 
-  searchTodo = e => {
-    console.log(e.target.value);
+  //search the todo from the todo list array
+  searchTodoFromTodoList = event => {
     if (this.originalTodoList.length !== 0) {
-      let value = e.target.value;
-      let updatedTodo = this.originalTodoList.map(data => data);
-
-      console.log(this.originalTodoList);
-
-      let filteredTodo = updatedTodo.filter(
-        v => v.todo.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      let value = event.target.value;
+      let todoListCopy = this.originalTodoList.map(data => data);
+      let filteredTodoList = todoListCopy.filter(
+        filteredTodo =>
+          filteredTodo.todo.toLowerCase().indexOf(value.toLowerCase()) !== -1
       );
       this.setState({
-        todoList: filteredTodo
+        todoList: filteredTodoList
       });
     } else {
       console.log('list is empty');
@@ -144,57 +143,57 @@ class App extends Component {
   render() {
     return (
       <div className="container todo-container">
-        <HeaderComponent />
-        <NavComponent handleComponent={this.handleComponentRender} />
+        <Header />
+        <Nav handleComponentRender={this.handleComponentRender} />
         <input
-          className="form-control search-text-box"
-          placeholder="search"
           type="text"
+          placeholder="search"
           value={this.state.searchText}
-          onChange={e => this.searchTodo(e)}
-          onFocus={e => (this.originalTodoList = this.state.todoList)}
-          onBlur={e => {
+          className="form-control search-text-box"
+          onBlur={event => {
             this.setState({ todoList: this.originalTodoList });
           }}
+          onChange={event => this.searchTodoFromTodoList(event)}
+          onFocus={event => (this.originalTodoList = this.state.todoList)}
         />
-        {this.state.isHomeTodoVisible && (
-          <HomeComponent
-            inputValue={this.state.inputValue}
-            submitInput={this.submitInput}
-            handleTextChange={this.handleTextChange}
-            todo={this.state.todoList}
-            handleDelete={this.handleDelete}
-            handleSelected={this.handleSelected}
+        {this.state.isTodoHomeVisible && (
+          <TodoHome
+            addTodo={this.addTodo}
+            editTodo={this.editTodo}
+            todos={this.state.todoList}
+            deleteTodo={this.deleteTodo}
             isEdited={this.state.isEdited}
             editIndex={this.state.editIndex}
-            handleEdition={this.handleEdition}
             handleChange={this.handleChange}
+            handleTextChange={this.handleTextChange}
+            inputTodoValue={this.state.inputTodoValue}
+            markTodoCompleted={this.markTodoCompleted}
           />
         )}
         {this.state.isCompleteTodoVisible && (
-          <Completed
-            inputValue={this.state.inputValue}
-            submitInput={this.submitInput}
-            handleTextChange={this.handleTextChange}
-            todo={this.state.todoList}
-            handleDelete={this.handleDelete}
-            handleSelected={this.handleSelected}
+          <CompletedTodoLists
+            addTodo={this.addTodo}
+            editTodo={this.editTodo}
+            todos={this.state.todoList}
+            deleteTodo={this.deleteTodo}
             isEdited={this.state.isEdited}
             editIndex={this.state.editIndex}
-            handleEdition={this.handleEdition}
+            handleTextChange={this.handleTextChange}
+            inputTodoValue={this.state.inputTodoValue}
+            markTodoCompleted={this.markTodoCompleted}
           />
         )}
         {this.state.isIncompleteTodoVisible && (
-          <Incomplete
-            inputValue={this.state.inputValue}
-            submitInput={this.submitInput}
-            handleTextChange={this.handleTextChange}
-            todo={this.state.todoList}
-            handleDelete={this.handleDelete}
-            handleSelected={this.handleSelected}
+          <InCompleteTodoList
+            addTodo={this.addTodo}
+            editTodo={this.editTodo}
+            todos={this.state.todoList}
+            deleteTodo={this.deleteTodo}
             isEdited={this.state.isEdited}
             editIndex={this.state.editIndex}
-            handleEdition={this.handleEdition}
+            handleTextChange={this.handleTextChange}
+            inputTodoValue={this.state.inputTodoValue}
+            markTodoCompleted={this.markTodoCompleted}
           />
         )}
       </div>
