@@ -22,7 +22,7 @@ class TodoHome extends React.Component {
           inputTodoValue={inputTodoValue}
           handleTextChange={handleTextChange}
         />
-        <DisplayTodoList todos={todos} props={this.props} />
+        <DisplayTodoList todos={todos} {...this.props} />
       </div>
     );
   }
@@ -31,7 +31,7 @@ class TodoHome extends React.Component {
 TodoHome.propTypes = {
   addTodo: PropTypes.func,
   deleteTodo: PropTypes.func,
-  todo: PropTypes.array.isRequired,
+  todos: PropTypes.array.isRequired,
   markTodoCompleted: PropTypes.func
 };
 

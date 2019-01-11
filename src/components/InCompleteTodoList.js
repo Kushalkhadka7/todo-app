@@ -12,7 +12,7 @@ const InCompleteTodoList = props => {
 
   return (
     <div>
-      <DisplayTodoList todos={mapInCompletedTodo()} props={props} />
+      <DisplayTodoList todos={mapInCompletedTodo()} {...props} />
     </div>
   );
 };

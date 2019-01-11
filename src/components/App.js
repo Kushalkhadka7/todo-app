@@ -116,7 +116,7 @@ class App extends Component {
   };
 
   handleChange = (value, index, e) => {
-    let todoListCopy = [...this.state.todoList];
+    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
     todoListCopy[index].todo = e ? e.target.value : value;
     this.setState({
       todoList: todoListCopy
@@ -135,8 +135,6 @@ class App extends Component {
       this.setState({
         todoList: filteredTodoList
       });
-    } else {
-      console.log('list is empty');
     }
   };
 

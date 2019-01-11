@@ -10,7 +10,7 @@ const CompletedTodoLists = props => {
     return todos.filter(value => value.isTodoCompleted === true);
   }
 
-  return <DisplayTodoList todos={mapCompletedTodo()} props={props} />;
+  return <DisplayTodoList todos={mapCompletedTodo()} {...props} />;
 };
 
 CompletedTodoLists.propTypes = {

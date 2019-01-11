@@ -8,7 +8,7 @@ const Nav = ({ handleComponentRender }) => (
         className="btn"
         onClick={() => handleComponentRender('renderTodoHome')}
       >
-        <i class="fas fa-home icons" />
+        <i className="fas fa-home icons" />
         <div>Home</div>
       </button>
     </div>
@@ -17,7 +17,7 @@ const Nav = ({ handleComponentRender }) => (
         className="btn"
         onClick={() => handleComponentRender('renderCompletedTodoLists')}
       >
-        <i class="fas fa-check icons" />
+        <i className="fas fa-check icons" />
         <div>Completed</div>
       </button>
     </div>
@@ -26,8 +26,8 @@ const Nav = ({ handleComponentRender }) => (
         className="btn"
         onClick={() => handleComponentRender('renderIncompleteTodoLists')}
       >
-        <i class="fas fa-clipboard-list icons" />
-        <div>Incomplete</div>
+        <i className="fas fa-clipboard-list icons" />
+        <div>Remaining</div>
       </button>
     </div>
   </div>

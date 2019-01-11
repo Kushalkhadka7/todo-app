@@ -13,15 +13,12 @@ const AddTodoForm = ({
           type="text"
           value={inputTodoValue}
           placeholder="add your todo"
-          onKeyUp={event => addTodo(event)}
+          onKeyUp={addTodo}
           className="form-control input-todo"
           onChange={text => handleTextChange(text)}
         />
         <div className="input-group-append">
-          <button
-            onClick={e => addTodo(e)}
-            className="btn btn-primary add-todo-btn"
-          >
+          <button onClick={addTodo} className="btn btn-primary add-todo-btn">
             Add
           </button>
         </div>

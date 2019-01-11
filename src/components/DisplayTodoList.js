@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 class DisplayTodoList extends React.Component {
   render() {
     let {
+      todos,
       isEdited,
       editTodo,
       editIndex,
       deleteTodo,
       handleChange,
       markTodoCompleted
-    } = this.props.props;
-    const { todos } = this.props;
+    } = this.props;
 
     return (
       <div className="row navcontainer">
@@ -23,15 +23,6 @@ class DisplayTodoList extends React.Component {
                 return (
                   <li key={value.id}>
                     <div className="each-list clearfix">
-                      <input
-                        className="completed-check"
-                        checked={value.isTodoCompleted}
-                        value={isEdited}
-                        type="checkbox"
-                        onChange={() =>
-                          markTodoCompleted(value.isTodoCompleted, index)
-                        }
-                      />
                       {isEdited ? (
                         <input
                           className="form-control edit-todo"
@@ -42,11 +33,36 @@ class DisplayTodoList extends React.Component {
                         />
                       ) : (
                         <div className="todo-content-container">
-                          <p className="todo-text">{value.todo}</p>
+                          <input
+                            className={
+                              isEdited ? 'margin:12px 0' : 'completed-check'
+                            }
+                            checked={value.isTodoCompleted}
+                            value={isEdited}
+                            type="checkbox"
+                            onChange={() =>
+                              markTodoCompleted(value.isTodoCompleted, index)
+                            }
+                          />
+                          <p
+                            className={
+                              value.isTodoCompleted
+                                ? 'todo-text mark-todo-completed'
+                                : 'todo-text'
+                            }
+                          >
+                            {value.todo}
+                          </p>
                           <p className="todo-date">Created At:{value.date}</p>
                         </div>
                       )}
-                      <div className="actions-btn-container">
+                      <div
+                        className={
+                          isEdited
+                            ? 'whileEditInputIsOpen'
+                            : 'actions-btn-container'
+                        }
+                      >
                         <button
                           disabled={value.isTodoCompleted}
                           className="btn btn-success action-btn"
@@ -76,8 +92,13 @@ class DisplayTodoList extends React.Component {
 }
 
 DisplayTodoList.propTypes = {
-  props: PropTypes.any.isRequired,
-  todo: PropTypes.array.isRequired
+  editIndex: PropTypes.number,
+  todos: PropTypes.array.isRequired,
+  isEdited: PropTypes.bool.isRequired,
+  editTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  markTodoCompleted: PropTypes.func.isRequired
 };
 
 export default DisplayTodoList;
