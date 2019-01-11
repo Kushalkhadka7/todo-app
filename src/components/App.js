@@ -10,7 +10,6 @@ import * as todoService from '../services/todo';
 
 class App extends Component {
   constructor() {
-    i;
     super();
     this.state = {
       todoList: [],
