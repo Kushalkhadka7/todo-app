@@ -1,7 +1,7 @@
 import React from 'react';
 
-const HeaderComponent = () => {
+const Header = () => {
   return <div className="todo-header">TodoApp</div>;
 };
 
-export default HeaderComponent;
+export default Header;
