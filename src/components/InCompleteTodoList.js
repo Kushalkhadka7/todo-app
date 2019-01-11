@@ -6,15 +6,11 @@ import DisplayTodoList from './DisplayTodoList';
 const InCompleteTodoList = props => {
   const { todos } = props;
 
-  function mapInCompletedTodo() {
+  function getIncompleteTodos() {
     return todos.filter(value => value.isTodoCompleted === false);
   }
 
-  return (
-    <div>
-      <DisplayTodoList todos={mapInCompletedTodo()} {...props} />
-    </div>
-  );
+  return <DisplayTodoList todos={getIncompleteTodos()} {...props} />;
 };
 
 InCompleteTodoList.propTypes = {

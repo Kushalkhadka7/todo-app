@@ -89,7 +89,7 @@ class App extends Component {
   };
 
   //marks the todo is completed using checkbox
-  markTodoCompleted = (bool, index) => {
+  markTodoComplete = (bool, index) => {
     bool = !bool;
     let todoListCopy = [...this.state.todoList];
     todoListCopy[index].isTodoCompleted = bool;
@@ -138,6 +138,10 @@ class App extends Component {
     }
   };
 
+  storeTodoList = () => {
+    this.setState({ todoList: this.originalTodoList });
+  };
+
   render() {
     return (
       <div className="container todo-container">
@@ -148,9 +152,7 @@ class App extends Component {
           placeholder="search"
           value={this.state.searchText}
           className="form-control search-text-box"
-          onBlur={event => {
-            this.setState({ todoList: this.originalTodoList });
-          }}
+          onBlur={this.storeTodoList}
           onChange={event => this.searchTodoFromTodoList(event)}
           onFocus={event => (this.originalTodoList = this.state.todoList)}
         />
@@ -165,7 +167,7 @@ class App extends Component {
             handleChange={this.handleChange}
             handleTextChange={this.handleTextChange}
             inputTodoValue={this.state.inputTodoValue}
-            markTodoCompleted={this.markTodoCompleted}
+            markTodoComplete={this.markTodoComplete}
           />
         )}
         {this.state.isCompleteTodoVisible && (
@@ -178,7 +180,7 @@ class App extends Component {
             editIndex={this.state.editIndex}
             handleTextChange={this.handleTextChange}
             inputTodoValue={this.state.inputTodoValue}
-            markTodoCompleted={this.markTodoCompleted}
+            markTodoComplete={this.markTodoComplete}
           />
         )}
         {this.state.isIncompleteTodoVisible && (
@@ -191,7 +193,7 @@ class App extends Component {
             editIndex={this.state.editIndex}
             handleTextChange={this.handleTextChange}
             inputTodoValue={this.state.inputTodoValue}
-            markTodoCompleted={this.markTodoCompleted}
+            markTodoComplete={this.markTodoComplete}
           />
         )}
       </div>

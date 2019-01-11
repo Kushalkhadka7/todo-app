@@ -10,7 +10,7 @@ class DisplayTodoList extends React.Component {
       editIndex,
       deleteTodo,
       handleChange,
-      markTodoCompleted
+      markTodoComplete
     } = this.props;
 
     return (
@@ -41,7 +41,7 @@ class DisplayTodoList extends React.Component {
                             value={isEdited}
                             type="checkbox"
                             onChange={() =>
-                              markTodoCompleted(value.isTodoCompleted, index)
+                              markTodoComplete(value.isTodoCompleted, index)
                             }
                           />
                           <p
@@ -98,7 +98,7 @@ DisplayTodoList.propTypes = {
   editTodo: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
-  markTodoCompleted: PropTypes.func.isRequired
+  markTodoComplete: PropTypes.func.isRequired
 };
 
 export default DisplayTodoList;

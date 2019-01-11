@@ -6,11 +6,11 @@ import DisplayTodoList from './DisplayTodoList';
 const CompletedTodoLists = props => {
   const { todos } = props;
 
-  function mapCompletedTodo() {
+  function getCompletedTodos() {
     return todos.filter(value => value.isTodoCompleted === true);
   }
 
-  return <DisplayTodoList todos={mapCompletedTodo()} {...props} />;
+  return <DisplayTodoList todos={getCompletedTodos()} {...props} />;
 };
 
 CompletedTodoLists.propTypes = {
