@@ -6,9 +6,11 @@ import Incomplete from './Incomplete';
 import NavComponent from './NavComponent';
 import HomeComponent from './HomeComponent';
 import HeaderComponent from './HeaderComponent';
+import * as todoService from '../services/todo';
 
 class App extends Component {
   constructor() {
+    i;
     super();
     this.state = {
       todoList: [],
@@ -23,6 +25,13 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    todoService.fetchTodos().then(todoList => {
+      this.setState({ todoList });
+    });
+  }
+
+  //determines which component to render in the Dom
   handleComponentRender = text => {
     switch (text) {
       case 'home':
