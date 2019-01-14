@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Spring } from 'react-spring';
+import { Spring as ReactSpring } from 'react-spring';
 
 import Nav from './Nav';
 import Header from './Header';
@@ -38,9 +38,12 @@ class App extends Component {
    * fetch data from api
    */
   componentDidMount() {
-    todoService.fetchTodos().then(todoList => {
-      this.setState({ todoList });
-    });
+    todoService
+      .fetchTodos()
+      .then(todoList => {
+        this.setState({ todoList });
+      })
+      .catch(error => error);
   }
 
   /**
@@ -90,7 +93,6 @@ class App extends Component {
     event.preventDefault();
     let value = this.state.inputTodoValue;
     let date = new Date().toISOString();
-    let todoListCopy = [...this.state.todoList];
     if (value !== '') {
       if (event.keyCode === 13 || event.type === 'click') {
         let toBeSavedTodo = {
@@ -103,9 +105,8 @@ class App extends Component {
         todoService
           .addTodosToStore(toBeSavedTodo)
           .then(data => {
-            todoListCopy.push(data.data);
             this.setState({
-              todoList: todoListCopy,
+              todoList: [...this.state.todoList, data.data],
               inputTodoValue: ''
             });
           })
@@ -123,21 +124,15 @@ class App extends Component {
    * @param {index}=>index of object to be deleted
    */
   deleteTodo = (index, value) => {
-    let todoListCopy = [...this.state.todoList];
+    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
     let obj = todoListCopy[index];
     todoService
       .deleteTodoFromStore(index, obj)
       .then(data => {
-        if (data.status === 200 || data.statusText === 'OK') {
-          todoListCopy.splice(index, 1);
-          this.setState({
-            todoList: todoListCopy
-          });
-        } else {
-          this.setState({
-            todoList: todoListCopy
-          });
-        }
+        todoListCopy.splice(index, 1);
+        this.setState({
+          todoList: todoListCopy
+        });
       })
       .catch(error => error);
   };
@@ -148,7 +143,7 @@ class App extends Component {
    * @param {index}=>index of the object in array which is to be marked completed or not
    */
   markTodoComplete = (value, index) => {
-    let todoListCopy = [...this.state.todoList];
+    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
     let obj = todoListCopy[index];
     obj.isTodoCompleted = !obj.isTodoCompleted;
     todoService
@@ -175,7 +170,7 @@ class App extends Component {
    * edit the todo in api
    */
   editTodo = index => {
-    let todoListCopy = [...this.state.todoList];
+    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
     todoListCopy[index].isEditedTodo = !todoListCopy[index].isEditedTodo;
     if (!todoListCopy[index].isEditedTodo) {
       todoService.editTodo(todoListCopy[index]);
@@ -207,18 +202,14 @@ class App extends Component {
    */
   searchTodoFromTodoList = event => {
     let value = event.target.value;
-    let todoListCopy = [...this.state.todoList];
+    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
     this.setState({ valueToSearch: value });
     if (true) {
       todoService
         .searchTodosFromStore(this.state.valueToSearch)
         .then(data => {
           todoListCopy = data.data;
-          if (data.status === 200 || data.statusText === 'OK') {
-            this.setState({ todoList: todoListCopy });
-          } else {
-            this.setState({ todoList: this.state.todoList });
-          }
+          this.setState({ todoList: todoListCopy });
         })
         .catch(error => error);
     }
@@ -239,7 +230,7 @@ class App extends Component {
    */
   render() {
     return (
-      <Spring
+      <ReactSpring
         from={{ opacity: 0 }}
         to={{ opacity: 1 }}
         config={{ duration: 1000 }}
@@ -302,7 +293,7 @@ class App extends Component {
             )}
           </div>
         )}
-      </Spring>
+      </ReactSpring>
     );
   }
 }

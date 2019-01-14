@@ -14,7 +14,6 @@ const CompletedTodoLists = props => {
   function getCompletedTodos() {
     return todos.filter(value => value.isTodoCompleted === true);
   }
-  console.log('completed', getCompletedTodos());
   return <DisplayTodoList {...props} todos={getCompletedTodos()} />;
 };
 

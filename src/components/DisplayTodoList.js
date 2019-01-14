@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spring } from 'react-spring';
+
 import withLoader from './Hoc/LoaderHoc';
+
 /**
  * @class DisplayTodoList
  * @extends {React.Component}
