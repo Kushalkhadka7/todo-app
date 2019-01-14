@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import AddTodoForm from './AddTodoForm';
 import DisplayTodoList from './DisplayTodoList';
 
+/**
+ * @class TodoHome
+ * @extends {React.Component}
+ * initilly render on the screen
+ * handles todo input field
+ * and displays all todos no matter completed or not
+ */
 class TodoHome extends React.Component {
   render() {
     const {
