@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @param {handleComponentRender} => function which handles which component to render
+ * based on the flags
+ */
 const Nav = ({ handleComponentRender }) => (
   <div className="row navcontainer navbar">
     <div className="col-md-4 nav-list">

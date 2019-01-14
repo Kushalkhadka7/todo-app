@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * input field to add todos
+ * @param {inputTodoValue} => value from the input field
+ *  @param {addTodo} => function to add todo to todolist
+ * @param {handleTextChange} => handle text change in todo input field
+ */
 const AddTodoForm = ({
   inputTodoValue,
   addTodo = f => f,
