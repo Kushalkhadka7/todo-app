@@ -1,13 +1,13 @@
 {
-  "main.css": "/todo-app/static/css/main.c7355261.chunk.css",
-  "main.js": "/todo-app/static/js/main.b718d791.chunk.js",
-  "main.js.map": "/todo-app/static/js/main.b718d791.chunk.js.map",
-  "static/js/1.539c7dc8.chunk.js": "/todo-app/static/js/1.539c7dc8.chunk.js",
-  "static/js/1.539c7dc8.chunk.js.map": "/todo-app/static/js/1.539c7dc8.chunk.js.map",
-  "runtime~main.js": "/todo-app/static/js/runtime~main.84c007b1.js",
-  "runtime~main.js.map": "/todo-app/static/js/runtime~main.84c007b1.js.map",
-  "static/css/main.c7355261.chunk.css.map": "/todo-app/static/css/main.c7355261.chunk.css.map",
-  "index.html": "/todo-app/index.html",
-  "precache-manifest.a5e6dd84bf254127adf5f061ff0976d3.js": "/todo-app/precache-manifest.a5e6dd84bf254127adf5f061ff0976d3.js",
-  "service-worker.js": "/todo-app/service-worker.js"
+  "main.css": "/todo-app/tree/TAGS-API-INTEGRATION/static/css/main.c7355261.chunk.css",
+  "main.js": "/todo-app/tree/TAGS-API-INTEGRATION/static/js/main.2542a220.chunk.js",
+  "main.js.map": "/todo-app/tree/TAGS-API-INTEGRATION/static/js/main.2542a220.chunk.js.map",
+  "static/js/1.539c7dc8.chunk.js": "/todo-app/tree/TAGS-API-INTEGRATION/static/js/1.539c7dc8.chunk.js",
+  "static/js/1.539c7dc8.chunk.js.map": "/todo-app/tree/TAGS-API-INTEGRATION/static/js/1.539c7dc8.chunk.js.map",
+  "runtime~main.js": "/todo-app/tree/TAGS-API-INTEGRATION/static/js/runtime~main.63454490.js",
+  "runtime~main.js.map": "/todo-app/tree/TAGS-API-INTEGRATION/static/js/runtime~main.63454490.js.map",
+  "static/css/main.c7355261.chunk.css.map": "/todo-app/tree/TAGS-API-INTEGRATION/static/css/main.c7355261.chunk.css.map",
+  "index.html": "/todo-app/tree/TAGS-API-INTEGRATION/index.html",
+  "precache-manifest.863fd8e26d0e43a55be92e4f52d84ac7.js": "/todo-app/tree/TAGS-API-INTEGRATION/precache-manifest.863fd8e26d0e43a55be92e4f52d84ac7.js",
+  "service-worker.js": "/todo-app/tree/TAGS-API-INTEGRATION/service-worker.js"
 }
