@@ -5,7 +5,7 @@ import DisplayTagsList from './DisplayTagsList';
 
 class Main extends React.Component {
   onSubmitTags = (name, type) => {
-    console.log(name, type);
+    //api call here
   };
   render() {
     return (
