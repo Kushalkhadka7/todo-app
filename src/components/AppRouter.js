@@ -2,9 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import App from './todo/App';
-import ROUTES from '../constants/routes';
 import Main from './tags/Main';
+import ROUTES from '../constants/routes';
 
+/**
+ * Router.
+ */
 const AppRouter = () => (
   <Router>
     <div>

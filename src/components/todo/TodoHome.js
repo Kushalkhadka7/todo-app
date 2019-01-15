@@ -6,12 +6,16 @@ import DisplayTodoList from './DisplayTodoList';
 
 /**
  * @class TodoHome
- * @extends {React.Component}
+ * @augments {React.Component}
  * initilly render on the screen
  * handles todo input field
  * and displays all todos no matter completed or not
  */
 class TodoHome extends React.Component {
+  /**
+   * @returns AddTodoForm and DisplayTodoList.
+   * @memberof TodoHome
+   */
   render() {
     const {
       todos,

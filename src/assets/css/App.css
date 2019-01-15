@@ -14,12 +14,18 @@
   box-sizing: border-box;
 }
 
+button {
+  padding: 0;
+  margin: 0;
+}
+
 .icons {
   font-size: 20px;
 }
 
-.search-text-box {
-  width: 94%;
+.search-text-box,
+.input-container {
+  width: 90%;
   margin: 0 auto;
   margin-bottom: 10px;
 }
@@ -55,9 +61,9 @@
 .tags-container {
   width: 50%;
   padding: 0;
+  height: 99vh;
   margin: 0 auto;
-  margin-top: 10px;
-  border: 1px solid #eaeaea;
+  border: 1px solid #dddddd;
   box-shadow: 5px 3px 5px -1px rgba(142, 142, 240, 0.3);
 }
 
@@ -73,15 +79,12 @@
 }
 
 .navbar {
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
+  padding: 0;
   background-color: #ed553b;
 }
 
-.input-todo {
-  width: 90%;
-}
-
-.todo-list .each-list {
+.todo-list-container .each-list {
   padding: 10px;
   display: block;
   font-size: 18px;
@@ -103,32 +106,44 @@
   text-align: center;
 }
 
-.todo-list {
-  height: 400px;
+.todo-list-container {
+  width: 90%;
+  height: 60vh;
+  margin: 0 auto;
   overflow-y: auto;
 }
 
-.todo-list ul {
+.todo-wrapper {
+  width: 90%;
+  float: left;
+  padding: 0 0 0 15px;
+}
+
+.todo-list-container ul {
   padding: 0;
 }
 
-.todo-list ul li {
+.todo-list-container ul li {
   display: inline;
   list-style-type: none;
 }
 
 .todo-text {
-  max-width: 80%;
+  width: 100%;
   text-align: left;
+  margin: 0;
   word-wrap: break-word;
   display: inline-block;
-  margin: 5px 15px 0 15px;
 }
 
 .todo-date {
-  max-width: 50%;
+  width: 100%;
+  margin: 0;
   text-align: left;
   word-wrap: break-word;
+  color: #797979;
+  font-size: 12px;
+  margin: 5px 0 0 0;
 }
 
 .action-btn {
@@ -154,13 +169,6 @@
 .tags-content-container {
   width: 70%;
   display: inline-block;
-}
-
-.todo-date {
-  color: #797979;
-  font-size: 12px;
-  margin: 5px 15px 0 25px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* 
@@ -203,6 +211,15 @@
   margin-top: 5px;
 }
 
+@media screen and (max-width: 992px) {
+  .todo-container {
+    width: 100%;
+  }
+  .todo-list-container {
+    height: 60vh;
+  }
+}
+
 @media screen and (max-width: 762px) {
   .todo-container,
   .tags-container {
@@ -241,11 +258,40 @@
     margin: -55px 0 0 5px;
   }
 
-  /* 
-  * for tags
-  */
-
   .tags-action-btn {
     margin: 10px 0 0 5px;
+  }
+
+  .todo-list-container {
+    height: 75vh;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .todo-container,
+  .tags-container {
+    opacity: 1;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    max-height: 100%;
+  }
+
+  .navbar {
+    display: block;
+  }
+
+  .nav-list {
+    width: 30%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+  .todo-list-container {
+    height: 70vh;
+  }
+
+  .todo-content-container {
+    width: 65%;
   }
 }

@@ -2,19 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * input field to add todos
- * @param {inputTodoValue} => value from the input field
- *  @param {addTodo} => function to add todo to todolist
- * @param {handleTextChange} => handle text change in todo input field
+ * @param {Function} {
+ *  InputTodoValue,
+ *  addTodo = f => f,
+ *  handleTextChange = f => f
+ * }
+ * .
  */
 const AddTodoForm = ({
   inputTodoValue,
   addTodo = f => f,
   handleTextChange = f => f
 }) => (
-  <div className="row navcontainer">
-    <div className="col-md-12 input-container">
-      <div className="input-group mb-3">
+  <div className="row">
+    <div className="col-md-12 ">
+      <div className="input-group mb-3 input-container">
         <input
           type="text"
           value={inputTodoValue}

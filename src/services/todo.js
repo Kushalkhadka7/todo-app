@@ -2,8 +2,8 @@ import http from '../utils/http';
 import API from '../constants/api';
 
 /**
- * @param {todo} => todo object
- * maps the value of from api with currently displayed todos
+ * @param {Object} todo
+ * Maps the value of from api with currently displayed todos.
  */
 const mapResponseToTodo = todo => ({
   ...todo,
@@ -11,8 +11,8 @@ const mapResponseToTodo = todo => ({
 });
 
 /**
- * @param {todo} => todo object
- * maps the value of from frontend with value of todo in api
+ * @param {Object} todo
+ * Maps the value of from frontend with value of todo in api.
  */
 const mapTodoToResponse = todo => ({
   ...todo,
@@ -20,12 +20,14 @@ const mapTodoToResponse = todo => ({
 });
 
 /**
- * fetch all todos from the api
+ * @returns All todos from api.
  */
 export async function fetchTodos() {
   try {
     let data = await http.get(API.TODOS);
+
     data = data.data.map(item => mapResponseToTodo(item));
+
     return Promise.resolve(data);
   } catch (err) {
     return Promise.reject(err);
@@ -33,12 +35,15 @@ export async function fetchTodos() {
 }
 
 /**
- * add todos to the store using api
+ * @param {Object} toBeAdded
+ * @returns Response from api either the data is added or not.
  */
 export async function addTodosToStore(toBeAdded) {
   try {
     let data = mapTodoToResponse(toBeAdded);
+
     data = await http.post(API.TODOS, data);
+
     return Promise.resolve(data);
   } catch (err) {
     return Promise.reject(err);
@@ -46,11 +51,14 @@ export async function addTodosToStore(toBeAdded) {
 }
 
 /**
- * delete specific todo in the store using the todo obj id
+ * @param {Number} index
+ * @param {Object} obj
+ * @returns
  */
 export async function deleteTodoFromStore(index, obj) {
   try {
-    let data = await http.delete(API.TODOS + `/${obj.id}`);
+    const data = await http.delete(API.TODOS + `/${obj.id}`);
+
     return Promise.resolve(data);
   } catch (error) {
     return Promise.reject(error);
@@ -58,12 +66,12 @@ export async function deleteTodoFromStore(index, obj) {
 }
 
 /**
- * mark specific todo complete or incomplete in the store
+ * @param {Object} obj
  */
 export async function markTodoCompleteInStore(obj) {
   try {
-    let data = await http.put(API.TODOS + `/${obj.id}`, { ...obj });
-    console.log(data);
+    const data = await http.put(API.TODOS + `/${obj.id}`, { ...obj });
+
     return Promise.resolve(data);
   } catch (error) {
     return Promise.reject(error);
@@ -71,11 +79,13 @@ export async function markTodoCompleteInStore(obj) {
 }
 
 /**
- * search todos in the store
+ * @param {String}searchText
+ * @returns
  */
 export async function searchTodosFromStore(searchText) {
   try {
-    let data = await http.get(`${API.TODOS}?q=${searchText}&limit=7`);
+    const data = await http.get(`${API.TODOS}?q=${searchText}&limit=7`);
+
     return Promise.resolve(data);
   } catch (error) {
     return Promise.reject(error);
@@ -83,11 +93,13 @@ export async function searchTodosFromStore(searchText) {
 }
 
 /**
- * edit specific todo text in the store
+ * @param {Object} obj
+ * @returns
  */
 export async function editTodo(obj) {
   try {
-    let data = await http.put(API.TODOS + `/${obj.id}`, { ...obj });
+    const data = await http.put(API.TODOS + `/${obj.id}`, { ...obj });
+
     return Promise.resolve(data);
   } catch (error) {
     return Promise.reject(error);
