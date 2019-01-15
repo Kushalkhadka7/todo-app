@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Spring as ReactSpring } from 'react-spring';
 
 import Nav from './Nav';
-import Header from './Header';
-import '../assets/css/App.css';
+import Header from '../Header';
+import '../../assets/css/App.css';
 import TodoHome from './TodoHome';
-import * as todoService from '../services/todo';
+import * as todoService from '../../services/todo';
 import CompletedTodoLists from './CompletedTodoLists';
 import InCompleteTodoList from './InCompleteTodoList';
 
