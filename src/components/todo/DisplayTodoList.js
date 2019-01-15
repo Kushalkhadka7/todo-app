@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Spring } from 'react-spring';
 
-import withLoader from './Hoc/LoaderHoc';
+import withLoader from '../hoc/LoaderHoc';
 
 /**
  * @class DisplayTodoList

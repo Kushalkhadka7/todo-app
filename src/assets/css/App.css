@@ -5,6 +5,15 @@
   display: table;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .icons {
   font-size: 20px;
 }
@@ -42,11 +51,13 @@
   font-weight: bold;
 }
 
-.todo-container {
+.todo-container,
+.tags-container {
   width: 50%;
   padding: 0;
   margin: 0 auto;
   margin-top: 10px;
+  border: 1px solid #eaeaea;
   box-shadow: 5px 3px 5px -1px rgba(142, 142, 240, 0.3);
 }
 
@@ -54,7 +65,8 @@
   color: #e4e4e4;
 }
 
-.navcontainer {
+.navcontainer,
+.tagsContainer {
   margin: 0;
   width: 100%;
   text-align: center;
@@ -112,6 +124,7 @@
   display: inline-block;
   margin: 5px 15px 0 15px;
 }
+
 .todo-date {
   max-width: 50%;
   text-align: left;
@@ -121,6 +134,7 @@
 .action-btn {
   margin: 0 5px;
 }
+
 .actions-btn-container {
   float: right;
   margin: 20px 0px 5px 0;
@@ -136,7 +150,8 @@
   z-index: 0;
 }
 
-.todo-content-container {
+.todo-content-container,
+.tags-content-container {
   width: 70%;
   display: inline-block;
 }
@@ -147,8 +162,51 @@
   margin: 5px 15px 0 25px;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 
+* for tags
+*/
+.tags-input-container {
+  width: 90%;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #f6f6f6;
+}
+
+.tags-input {
+  margin: 1px 0 15px 0;
+}
+
+.tags-input-container label {
+  font-size: 17px;
+}
+
+.add-tags-btn {
+  margin: 5px 0 0 0;
+}
+
+.tags-action-btn {
+  margin: 10px 0 0 5px;
+}
+
+.tags-btn {
+  margin: 0 2px;
+}
+
+.tagsContainer {
+  margin-top: 10px;
+}
+
+.edit-tags-input {
+  width: 55%;
+  display: inline-block;
+  margin-top: 5px;
+}
+
 @media screen and (max-width: 762px) {
-  .todo-container {
+  .todo-container,
+  .tags-container {
+    width: 100%;
     margin-top: 0;
     margin-top: 5px;
     min-height: 630px;
@@ -179,11 +237,15 @@
     padding: 0;
   }
 
-  .todo-container {
-    width: 100%;
-  }
-
   .actions-btn-container {
     margin: -55px 0 0 5px;
+  }
+
+  /* 
+  * for tags
+  */
+
+  .tags-action-btn {
+    margin: 10px 0 0 5px;
   }
 }

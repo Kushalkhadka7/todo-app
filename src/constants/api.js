@@ -1,3 +1,4 @@
 export default {
-  TODOS: '/todos'
+  TODOS: '/todos',
+  TAGS: '/tags'
 };
