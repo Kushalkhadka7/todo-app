@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/todo-app/tree/TAGS-API-INTEGRATION/precache-manifest.105ab6233d6ea3d5b9f4b6d0e3351b86.js"
+  "/todo-app/precache-manifest.e45abf3cda093228c64d42cc508b27ca.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/todo-app/tree/TAGS-API-INTEGRATION/index.html", {
+workbox.routing.registerNavigationRoute("/todo-app/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
