@@ -88,7 +88,7 @@ class DisplayTodoList extends React.Component {
                           >
                             <button
                               disabled={value.isTodoCompleted}
-                              className="btn btn-success action-btn"
+                              className="btn action-btn"
                               onClick={() => editTodo(index)}
                             >
                               {value.isEditedTodo ? (
@@ -98,7 +98,7 @@ class DisplayTodoList extends React.Component {
                               )}
                             </button>
                             <button
-                              className="btn btn-danger action-btn"
+                              className="btn action-btn"
                               onClick={() => deleteTodo(index, value)}
                             >
                               Delete
