@@ -30,7 +30,7 @@ class App extends Component {
       editIndex: null,
       valueToSearch: '',
       inputTodoValue: '',
-      editedTodoValue: '',
+      editedTodoValue: null,
       isTodoCompleted: false,
       isTodoHomeVisible: true,
       isCompleteTodoVisible: false,
@@ -220,16 +220,29 @@ class App extends Component {
    */
   searchTodoFromTodoList = event => {
     const value = event.target.value;
-    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
+    // let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
 
-    this.setState({ valueToSearch: value });
-    todoService
-      .searchTodosFromStore(this.state.valueToSearch)
-      .then(data => {
-        todoListCopy = data.data;
-        this.setState({ todoList: todoListCopy });
-      })
-      .catch(error => error);
+    // this.setState({ valueToSearch: value });
+    // todoService
+    //   .searchTodosFromStore(this.state.valueToSearch)
+    //   .then(data => {
+    //     todoListCopy = data.data;
+    //     this.setState({ todoList: todoListCopy });
+    //   })
+    //   .catch(error => error);
+
+    if (value) {
+      todoService
+        .searchTodosFromStore(value)
+        .then(data => {
+          this.setState({ valueToSearch: data.data });
+        })
+        .catch(error => error);
+    } else {
+      this.setState({
+        valueToSearch: null
+      });
+    }
   };
 
   /**
@@ -246,6 +259,8 @@ class App extends Component {
    * @memberof App
    */
   render() {
+    const todo = this.state.valueToSearch || this.state.todoList;
+
     return (
       <ReactSpring
         from={{ opacity: 0 }}
@@ -269,7 +284,7 @@ class App extends Component {
               <TodoHome
                 addTodo={this.addTodo}
                 editTodo={this.editTodo}
-                todos={this.state.todoList}
+                todos={todo}
                 deleteTodo={this.deleteTodo}
                 isEdited={this.state.isEdited}
                 editIndex={this.state.editIndex}
@@ -284,7 +299,7 @@ class App extends Component {
               <CompletedTodoLists
                 addTodo={this.addTodo}
                 editTodo={this.editTodo}
-                todos={this.state.todoList}
+                todos={todo}
                 deleteTodo={this.deleteTodo}
                 isEdited={this.state.isEdited}
                 editIndex={this.state.editIndex}
@@ -298,7 +313,7 @@ class App extends Component {
               <InCompleteTodoList
                 addTodo={this.addTodo}
                 editTodo={this.editTodo}
-                todos={this.state.todoList}
+                todos={todo}
                 deleteTodo={this.deleteTodo}
                 isEdited={this.state.isEdited}
                 editIndex={this.state.editIndex}

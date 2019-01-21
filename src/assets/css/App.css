@@ -32,13 +32,13 @@ button {
 
 .edit-todo {
   max-width: 60%;
-  margin: 0 10px;
+  margin: 5px 10px;
   display: inline-block;
 }
 
 .whileEditInputIsOpen {
   float: right;
-  margin: 0 0 0 0;
+  margin: 7px 0px;
 }
 
 .todo-header {
@@ -59,7 +59,7 @@ button {
 .tags-container {
   width: 50%;
   padding: 0;
-  height: 99vh;
+  height: 100vh;
   margin: 0 auto;
   border: 1px solid #dddddd;
   box-shadow: 5px 3px 5px -1px rgba(142, 142, 240, 0.3);
@@ -88,6 +88,7 @@ button {
 
 .todo-list-container .each-list {
   padding: 10px;
+  height: 75px;
   display: block;
   font-size: 18px;
   text-align: left;
@@ -109,6 +110,7 @@ button {
 }
 
 .todo-list-container {
+  height: 60vh;
   width: 90%;
   margin: 0 auto;
   overflow-y: auto;
@@ -153,7 +155,7 @@ button {
 
 .actions-btn-container {
   float: right;
-  margin: 20px 0px 5px 0;
+  margin: 7px 0px 5px 0;
 }
 
 .model-button {
@@ -189,7 +191,8 @@ button {
 
 .todo-content-container,
 .tags-content-container {
-  width: 70%;
+  height: 65vh;
+  width: 65%;
   display: inline-block;
 }
 
@@ -233,9 +236,14 @@ button {
   margin-top: 5px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {  
   .todo-container {
     width: 100%;
+    height: 100vh;
+  }
+
+  .todo-list-container {
+    height: 60vh;
   }
 }
 
@@ -244,7 +252,7 @@ button {
   .tags-container {
     width: 100%;
     margin-top: 0;
-    margin-top: 5px;
+    height: 98vh;
     position: relative;
   }
 
@@ -273,12 +281,16 @@ button {
     padding: 0;
   }
 
-  .actions-btn-container {
-    margin: -55px 0 0 5px;
-  }
-
   .tags-action-btn {
     margin: 10px 0 0 5px;
+  }
+
+  .todo-content-container {
+    width: 61%;
+  }
+
+  .todo-list-container {
+    height: 65vh;
   }
 }
 
@@ -286,9 +298,9 @@ button {
   .todo-container,
   .tags-container {
     opacity: 1;
-    margin: 0;
+    margin-top: 0;
     padding: 0;
-    height: 97vh;
+    height: 100vh;
   }
 
   .navbar {
@@ -302,7 +314,32 @@ button {
     text-align: left;
   }
 
+  .todo-list-container {
+    height: 60vh;
+  }
+
+  .todo-date {
+    margin: 0;
+  }
+
+  .edit-todo {
+    width: 40%;
+  }
+
   .todo-content-container {
-    width: 65%;
+    height: auto;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .todo-container {
+    height: 100vh;
+  }
+  .todo-list-container {
+    height: 65vh;
+  }
+  .todo-content-container {
+    width: 50%;
   }
 }

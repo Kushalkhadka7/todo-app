@@ -4,7 +4,7 @@ import axios from 'axios';
  * Base url for our api.
  */
 const http = axios.create({
-  baseURL: 'https://personaltodo.herokuapp.com/'
+  baseURL: 'hhttps://personaltodo.herokuapp.com/todos'
 });
 
 export default http;
