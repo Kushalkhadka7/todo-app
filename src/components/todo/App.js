@@ -10,11 +10,18 @@ import CompletedTodoLists from './CompletedTodoLists';
 import InCompleteTodoList from './InCompleteTodoList';
 
 /**
- * @class App =>container for all other componentes
- * handles states for all child components
- * @extends {Component}
+ * @class App
+ * @param {Object} event
+ * @augments {Component}
  */
 class App extends Component {
+  /**
+   * Creates an instance of App.
+   *
+   * @param {*} props
+   * @memberof App
+   * .
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +30,7 @@ class App extends Component {
       editIndex: null,
       valueToSearch: '',
       inputTodoValue: '',
-      editedTodoValue: '',
+      editedTodoValue: null,
       isTodoCompleted: false,
       isTodoHomeVisible: true,
       isCompleteTodoVisible: false,
@@ -35,7 +42,7 @@ class App extends Component {
 
   /**
    * @memberof App
-   * fetch data from api
+   * Fetch data from api.
    */
   componentDidMount() {
     todoService
@@ -48,9 +55,9 @@ class App extends Component {
 
   /**
    * @memberof App
-   * determines which component to render in the Dom
-   * changes the flags based on the input text from nav component
-   * @param text => text to render components
+   * determines which component to render in the Dom.
+   * changes the flags based on the input text from nav component.
+   * @param {String}  text
    */
   handleComponentRender = text => {
     switch (text) {
@@ -84,24 +91,27 @@ class App extends Component {
 
   /**
    * @memberof App
-   * add new todo to the todoList array
-   * saves the added todo to the api
-   * @param event => click or submit event after the todo text is completed
-   * if todo is empty it doesnt allow to call the api
+   * Add new todo to the todoList array.
+   * Saves the added todo to the api.
+   * @param {Object} event
+   * Click or submit event after the todo text is completed.
+   * If todo is empty it doesnt allow to call the api.
    */
   addTodo = event => {
     event.preventDefault();
-    let value = this.state.inputTodoValue;
-    let date = new Date().toISOString();
+    const value = this.state.inputTodoValue;
+    const date = new Date().toISOString();
+
     if (value !== '') {
       if (event.keyCode === 13 || event.type === 'click') {
-        let toBeSavedTodo = {
+        const toBeSavedTodo = {
           id: Date.now(),
           todo: value,
           isEditedTodo: false,
           isTodoCompleted: false,
           date: date
         };
+
         todoService
           .addTodosToStore(toBeSavedTodo)
           .then(data => {
@@ -119,16 +129,18 @@ class App extends Component {
 
   /**
    * @memberof App
-   * deletes a particular  todo from the todolist array uisng the index
-   * sends the object to be deleted to the api
-   * @param {index}=>index of object to be deleted
+   * Deletes a particular  todo from the todolist array uisng the index.
+   * Sends the object to be deleted to the api.
+   * @param {Number} index
+   * Index of object to be deleted.
    */
-  deleteTodo = (index, value) => {
-    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
-    let obj = todoListCopy[index];
+  deleteTodo = index => {
+    const todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
+    const obj = todoListCopy[index];
+
     todoService
       .deleteTodoFromStore(index, obj)
-      .then(data => {
+      .then(() => {
         todoListCopy.splice(index, 1);
         this.setState({
           todoList: todoListCopy
@@ -139,12 +151,15 @@ class App extends Component {
 
   /**
    * @memberof App
-   * marks the todo is completed using checkbox
-   * @param {index}=>index of the object in array which is to be marked completed or not
+   * Marks the todo is completed using checkbox.
+   * @param {Object} value
+   * @param {Number} index
+   * Index of the object in array which is to be marked completed or not.
    */
   markTodoComplete = (value, index) => {
-    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
-    let obj = todoListCopy[index];
+    const todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
+    const obj = todoListCopy[index];
+
     obj.isTodoCompleted = !obj.isTodoCompleted;
     todoService
       .markTodoCompleteInStore(obj)
@@ -166,11 +181,13 @@ class App extends Component {
   /**
    * @memberof App
    * edit the todo text using the index
-   * @param {index}=> index of object which edit field is to be toggled
-   * edit the todo in api
+   * @param {Number} index
+   * Index of object which edit field is to be toggled.
+   * Edit the todo in api.
    */
   editTodo = index => {
-    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
+    const todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
+
     todoListCopy[index].isEditedTodo = !todoListCopy[index].isEditedTodo;
     if (!todoListCopy[index].isEditedTodo) {
       todoService.editTodo(todoListCopy[index]);
@@ -182,13 +199,14 @@ class App extends Component {
 
   /**
    * @memberof App
-   * handles changes to the edited text form edit input field of todo
-   * @param {value} = current todo text
-   * @param {index} = index of object which todo text is to be eidited
-   * @param {event} => event from the edit input field
+   * Handles changes to the edited text form edit input field of todo.
+   * @param {Object} value
+   * @param {Number} index
+   * @param {Object} event
    */
   handleChange = (value, index, event) => {
-    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
+    const todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
+
     todoListCopy[index].todo = event ? event.target.value : value;
     this.setState({
       todoList: todoListCopy
@@ -197,21 +215,33 @@ class App extends Component {
 
   /**
    * @memberof App
-   * search the todo from the todo list array and also in api
-   * @param {event} => event form the search text input field
+   * Search the todo from the todo list array and also in api.
+   * @param {Object}event
    */
   searchTodoFromTodoList = event => {
-    let value = event.target.value;
-    let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
-    this.setState({ valueToSearch: value });
-    if (true) {
+    const value = event.target.value;
+    // let todoListCopy = this.state.todoList.map(todo => ({ ...todo }));
+
+    // this.setState({ valueToSearch: value });
+    // todoService
+    //   .searchTodosFromStore(this.state.valueToSearch)
+    //   .then(data => {
+    //     todoListCopy = data.data;
+    //     this.setState({ todoList: todoListCopy });
+    //   })
+    //   .catch(error => error);
+
+    if (value) {
       todoService
-        .searchTodosFromStore(this.state.valueToSearch)
+        .searchTodosFromStore(value)
         .then(data => {
-          todoListCopy = data.data;
-          this.setState({ todoList: todoListCopy });
+          this.setState({ valueToSearch: data.data });
         })
         .catch(error => error);
+    } else {
+      this.setState({
+        valueToSearch: null
+      });
     }
   };
 
@@ -224,11 +254,13 @@ class App extends Component {
   };
 
   /**
-   * @returns => components based on the current active flags
-   * pass states and functions as props to their respective components
+   * @returns => Components based on the current active flags.
+   * Pass states and functions as props to their respective components.
    * @memberof App
    */
   render() {
+    const todo = this.state.valueToSearch || this.state.todoList;
+
     return (
       <ReactSpring
         from={{ opacity: 0 }}
@@ -246,13 +278,13 @@ class App extends Component {
               className="form-control search-text-box"
               onBlur={this.storeTodoList}
               onChange={event => this.searchTodoFromTodoList(event)}
-              onFocus={event => (this.originalTodoList = this.state.todoList)}
+              onFocus={() => (this.originalTodoList = this.state.todoList)}
             />
             {this.state.isTodoHomeVisible && (
               <TodoHome
                 addTodo={this.addTodo}
                 editTodo={this.editTodo}
-                todos={this.state.todoList}
+                todos={todo}
                 deleteTodo={this.deleteTodo}
                 isEdited={this.state.isEdited}
                 editIndex={this.state.editIndex}
@@ -267,7 +299,7 @@ class App extends Component {
               <CompletedTodoLists
                 addTodo={this.addTodo}
                 editTodo={this.editTodo}
-                todos={this.state.todoList}
+                todos={todo}
                 deleteTodo={this.deleteTodo}
                 isEdited={this.state.isEdited}
                 editIndex={this.state.editIndex}
@@ -281,7 +313,7 @@ class App extends Component {
               <InCompleteTodoList
                 addTodo={this.addTodo}
                 editTodo={this.editTodo}
-                todos={this.state.todoList}
+                todos={todo}
                 deleteTodo={this.deleteTodo}
                 isEdited={this.state.isEdited}
                 editIndex={this.state.editIndex}

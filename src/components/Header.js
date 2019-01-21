@@ -1,10 +1,16 @@
 import React from 'react';
 
 /**
- *  header component displays todo header
+ *  Header component displays todo header.
  */
 const Header = () => {
-  return <div className="todo-header">TodoApp</div>;
+  return (
+    <div className="row">
+      <div className="col-md-12">
+        <div className="todo-header">TodoApp</div>
+      </div>
+    </div>
+  );
 };
 
 export default Header;

@@ -14,35 +14,39 @@
   box-sizing: border-box;
 }
 
+button {
+  padding: 0;
+  margin: 0;
+}
+
 .icons {
   font-size: 20px;
 }
 
-.search-text-box {
-  width: 94%;
+.search-text-box,
+.input-container {
+  width: 90%;
   margin: 0 auto;
   margin-bottom: 10px;
 }
 
 .edit-todo {
   max-width: 60%;
-  margin: 0 10px;
+  margin: 5px 10px;
   display: inline-block;
 }
 
 .whileEditInputIsOpen {
   float: right;
-  margin: 0 0 0 0;
+  margin: 7px 0px;
 }
 
 .todo-header {
   padding: 10px;
   font-size: 25px;
+  color: #757575;
   font-weight: bold;
   text-align: center;
-  background: #4ea4bd;
-  border-bottom: 1px solid #ccc;
-  color: #e6e6e6;
 }
 
 .mark-todo-completed {
@@ -55,14 +59,18 @@
 .tags-container {
   width: 50%;
   padding: 0;
+  height: 100vh;
   margin: 0 auto;
-  margin-top: 10px;
-  border: 1px solid #eaeaea;
+  border: 1px solid #dddddd;
   box-shadow: 5px 3px 5px -1px rgba(142, 142, 240, 0.3);
 }
 
 .todo-container .btn {
   color: #e4e4e4;
+}
+
+.navcontainer .btn {
+  color: #757575;
 }
 
 .navcontainer,
@@ -73,16 +81,14 @@
 }
 
 .navbar {
-  margin-bottom: 10px;
-  background-color: #ed553b;
+  padding: 0;
+  margin: 5px 0 10px 0;
+  border-top: 1px solid #a9a9a9;
 }
 
-.input-todo {
-  width: 90%;
-}
-
-.todo-list .each-list {
+.todo-list-container .each-list {
   padding: 10px;
+  height: 75px;
   display: block;
   font-size: 18px;
   text-align: left;
@@ -103,32 +109,44 @@
   text-align: center;
 }
 
-.todo-list {
-  height: 400px;
+.todo-list-container {
+  height: 60vh;
+  width: 90%;
+  margin: 0 auto;
   overflow-y: auto;
 }
 
-.todo-list ul {
+.todo-wrapper {
+  width: 90%;
+  float: left;
+  padding: 0 0 0 15px;
+}
+
+.todo-list-container ul {
   padding: 0;
 }
 
-.todo-list ul li {
+.todo-list-container ul li {
   display: inline;
   list-style-type: none;
 }
 
 .todo-text {
-  max-width: 80%;
+  width: 100%;
   text-align: left;
+  margin: 0;
   word-wrap: break-word;
   display: inline-block;
-  margin: 5px 15px 0 15px;
 }
 
 .todo-date {
-  max-width: 50%;
+  width: 100%;
+  margin: 0;
   text-align: left;
   word-wrap: break-word;
+  color: #797979;
+  font-size: 12px;
+  margin: 5px 0 0 0;
 }
 
 .action-btn {
@@ -137,7 +155,7 @@
 
 .actions-btn-container {
   float: right;
-  margin: 20px 0px 5px 0;
+  margin: 7px 0px 5px 0;
 }
 
 .model-button {
@@ -146,21 +164,36 @@
   position: absolute;
 }
 
-.add-todo-btn {
+.add-todo-btn,
+.action-btn {
+  background: #00bcd4;
+  border: 0;
   z-index: 0;
+}
+
+.action-btn:hover {
+  background: #00bcd4;
+}
+
+.action-btn:disabled {
+  background: #757575d4;
+}
+
+.navbar .btn,
+.action-btn:focus,
+.action-btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+.navbar .btn:active {
+  color: rgb(0, 38, 255);
 }
 
 .todo-content-container,
 .tags-content-container {
-  width: 70%;
+  height: 65vh;
+  width: 65%;
   display: inline-block;
-}
-
-.todo-date {
-  color: #797979;
-  font-size: 12px;
-  margin: 5px 15px 0 25px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* 
@@ -203,18 +236,28 @@
   margin-top: 5px;
 }
 
+@media screen and (max-width: 992px) {  
+  .todo-container {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .todo-list-container {
+    height: 60vh;
+  }
+}
+
 @media screen and (max-width: 762px) {
   .todo-container,
   .tags-container {
     width: 100%;
     margin-top: 0;
-    margin-top: 5px;
-    min-height: 630px;
+    height: 98vh;
     position: relative;
   }
 
   .todo-header {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   .navbar {
@@ -224,6 +267,7 @@
     display: flex;
     margin-bottom: 0;
     position: absolute;
+    background-color: #ebebeb;
     justify-content: space-evenly;
   }
 
@@ -237,15 +281,65 @@
     padding: 0;
   }
 
-  .actions-btn-container {
-    margin: -55px 0 0 5px;
-  }
-
-  /* 
-  * for tags
-  */
-
   .tags-action-btn {
     margin: 10px 0 0 5px;
+  }
+
+  .todo-content-container {
+    width: 61%;
+  }
+
+  .todo-list-container {
+    height: 65vh;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .todo-container,
+  .tags-container {
+    opacity: 1;
+    margin-top: 0;
+    padding: 0;
+    height: 100vh;
+  }
+
+  .navbar {
+    display: block;
+  }
+
+  .nav-list {
+    width: 30%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  .todo-list-container {
+    height: 60vh;
+  }
+
+  .todo-date {
+    margin: 0;
+  }
+
+  .edit-todo {
+    width: 40%;
+  }
+
+  .todo-content-container {
+    height: auto;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .todo-container {
+    height: 100vh;
+  }
+  .todo-list-container {
+    height: 65vh;
+  }
+  .todo-content-container {
+    width: 50%;
   }
 }

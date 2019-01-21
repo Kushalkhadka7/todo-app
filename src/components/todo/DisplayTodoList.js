@@ -12,8 +12,12 @@ import withLoader from '../hoc/LoaderHoc';
  * handles delete and edit todo
  */
 class DisplayTodoList extends React.Component {
+  /**
+   * @returns
+   * @memberof DisplayTodoList
+   */
   render() {
-    let {
+    const {
       todos,
       editTodo,
       deleteTodo,
@@ -22,84 +26,92 @@ class DisplayTodoList extends React.Component {
     } = this.props;
 
     return (
-      <div className="row navcontainer">
-        <div className="col-md-12 todo-list">
-          <ul>
-            {todos.map((value, index) => {
-              return (
-                <li key={value.id}>
-                  <Spring
-                    from={{ opacity: 0 }}
-                    to={{ opacity: 1 }}
-                    config={{ duration: 500 }}
-                  >
-                    {props => (
-                      <div style={props} className="each-list clearfix">
-                        {value.isEditedTodo ? (
-                          <input
-                            className="form-control edit-todo"
-                            type="text"
-                            value={value.todo}
-                            onChange={e => handleChange(value.todo, index, e)}
-                            onKeyUp={e => e.key === 'Enter' && editTodo(index)}
-                          />
-                        ) : (
-                          <div className="todo-content-container">
+      <div className="row">
+        <div className="col-md-12 ">
+          <div className="todo-list-container">
+            <ul>
+              {todos.map((value, index) => {
+                return (
+                  <li key={value.id}>
+                    <Spring
+                      from={{ opacity: 0 }}
+                      to={{ opacity: 1 }}
+                      config={{ duration: 500 }}
+                    >
+                      {props => (
+                        <div style={props} className="each-list clearfix">
+                          {value.isEditedTodo ? (
                             <input
-                              className={
-                                value.isEditedTodo
-                                  ? 'margin:12px 0'
-                                  : 'completed-check'
+                              className="form-control edit-todo"
+                              type="text"
+                              value={value.todo}
+                              onChange={e => handleChange(value.todo, index, e)}
+                              onKeyUp={e =>
+                                e.key === 'Enter' && editTodo(index)
                               }
-                              checked={value.isTodoCompleted}
-                              value={value.isEditedTodo}
-                              type="checkbox"
-                              onChange={() => markTodoComplete(value, index)}
                             />
-                            <p
-                              className={
-                                value.isTodoCompleted
-                                  ? 'todo-text mark-todo-completed'
-                                  : 'todo-text'
-                              }
+                          ) : (
+                            <div className="todo-content-container clearfix">
+                              <input
+                                className={
+                                  value.isEditedTodo
+                                    ? 'margin:12px 0'
+                                    : 'completed-check'
+                                }
+                                checked={value.isTodoCompleted}
+                                value={value.isEditedTodo}
+                                type="checkbox"
+                                onChange={() => markTodoComplete(value, index)}
+                              />
+                              <div className="clearfix todo-wrapper">
+                                <p
+                                  className={
+                                    value.isTodoCompleted
+                                      ? 'todo-text mark-todo-completed'
+                                      : 'todo-text'
+                                  }
+                                >
+                                  {value.todo}
+                                </p>
+                                <p className="todo-date">
+                                  Created At:{value.date}
+                                </p>
+                              </div>
+                            </div>
+                          )}
+                          <div
+                            className={
+                              value.isEditedTodo
+                                ? 'whileEditInputIsOpen'
+                                : 'actions-btn-container'
+                            }
+                          >
+                            <button
+                              disabled={value.isTodoCompleted}
+                              className="btn action-btn"
+                              onClick={() => editTodo(index)}
                             >
-                              {value.todo}
-                            </p>
-                            <p className="todo-date">Created At:{value.date}</p>
+                              {value.isEditedTodo ? (
+                                <i className="fas fa-check" />
+                              ) : (
+                                'Edit'
+                              )}
+                            </button>
+                            <button
+                              className="btn action-btn"
+                              onClick={() => deleteTodo(index, value)}
+                            >
+                              Delete
+                            </button>
                           </div>
-                        )}
-                        <div
-                          className={
-                            value.isEditedTodo
-                              ? 'whileEditInputIsOpen'
-                              : 'actions-btn-container'
-                          }
-                        >
-                          <button
-                            disabled={value.isTodoCompleted}
-                            className="btn btn-success action-btn"
-                            onClick={() => editTodo(index)}
-                          >
-                            {value.isEditedTodo ? (
-                              <i className="fas fa-check" />
-                            ) : (
-                              'Edit'
-                            )}
-                          </button>
-                          <button
-                            className="btn btn-danger action-btn"
-                            onClick={() => deleteTodo(index, value)}
-                          >
-                            Delete
-                          </button>
                         </div>
-                      </div>
-                    )}
-                  </Spring>
-                </li>
-              );
-            })}
-          </ul>
+                      )}
+                    </Spring>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     );

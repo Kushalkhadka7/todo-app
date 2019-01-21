@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
  * form to add tags
  */
 class AddTags extends React.Component {
+  /**
+   * @param {*} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -16,12 +19,13 @@ class AddTags extends React.Component {
   }
 
   /**
-   * @memberof AddTags
+    @memberof AddTags
    * handle state change of the input tags fields(name,type)
-   * @param {event} => change event in input fiels
-   */
+   * @param {changeTextInInputField} event
+    */
   handleChange = event => {
     const { name } = event.target;
+
     if (name === 'tagName') {
       this.setState({ name: event.target.value });
     } else if (name === 'tagType') {
@@ -31,13 +35,14 @@ class AddTags extends React.Component {
 
   /**
    * @memberof AddTags
-   * submit the input data
-   * @param {event} => submit form event
-   * pass the name and type event to parent class onSubmitTags function
+   * Submit the input data.
+   * @param {tagsSubmit} event
+   * Pass the name and type event to parent class onSubmitTags function.
    */
   handleSubmit = event => {
     event.preventDefault();
     const { name, type } = this.state;
+
     if (name !== '' && type !== '') {
       this.props.onSubmitTags(this.state.name, this.state.type);
       this.setState({ name: '', type: '' });
@@ -47,7 +52,7 @@ class AddTags extends React.Component {
   };
 
   /**
-   * @returns => name and type input field
+   * @returns => Name and type input field.
    * @memberof AddTags
    */
   render() {

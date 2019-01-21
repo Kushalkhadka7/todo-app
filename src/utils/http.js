@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 /**
- * base url for our api
+ * Base url for our api.
  */
 const http = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'hhttps://personaltodo.herokuapp.com/todos'
 });
 
 export default http;
